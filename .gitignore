@@ -1,0 +1,13 @@
+.venv
+.env
+__pycache__
+*.db
+instance/
+*.log
+log.html
+output.xml
+report.html
+*.png
+!misc/*.png
+secret.env
+playwright-log.txt
