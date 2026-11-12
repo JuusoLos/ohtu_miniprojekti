@@ -1,6 +1,6 @@
 import unittest
 
-class TestTodoValidation(unittest.TestCase):
+class TestValidation(unittest.TestCase):
     def setUp(self):
         pass
 
