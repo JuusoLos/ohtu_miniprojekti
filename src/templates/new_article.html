@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}Lisää artikkeli{% endblock %}
+
+{% block body %}
+<h1>Lisää artikkeli</h1>
+
+{% if saved %}
+  <p role="status">Artikkeli tallennettu.</p>
+{% endif %}
+
+{% if error %}
+  <p role="alert">{{ error }}</p>
+{% endif %}
+
+<form action="/articles" method="post">
+  <p>
+    <label for="citation_key">Viiteavain</label><br>
+    <input id="citation_key" name="citation_key" required
+           value="{{ values.get('citation_key', '') }}">
+  </p>
+
+  <p>
+    <label for="author">Kirjoittaja</label><br>
+    <input id="author" name="author" required
+           value="{{ values.get('author', '') }}">
+  </p>
+
+  <p>
+    <label for="title">Otsikko</label><br>
+    <input id="title" name="title" required
+           value="{{ values.get('title', '') }}">
+  </p>
+
+  <p>
+    <label for="journal">Julkaisun nimi</label><br>
+    <input id="journal" name="journal" required
+           value="{{ values.get('journal', '') }}">
+  </p>
+
+  <p>
+    <label for="year">Vuosi</label><br>
+    <input id="year" name="year" inputmode="numeric" required
+           value="{{ values.get('year', '') }}">
+  </p>
+
+  <button type="submit">Tallenna artikkeli</button>
+</form>
+
+<p><a href="/">Takaisin etusivulle</a></p>
+{% endblock %}
