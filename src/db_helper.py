@@ -3,10 +3,9 @@ from sqlalchemy import text
 import os
 
 def reset_db():
-  print(f"Clearing contents from table ")
-  sql = text(f"DELETE FROM ")
-  db.session.execute(sql)
-  db.session.commit()
+    """Tyhjentaa artikkelitaulun testeja varten."""
+    db.session.execute(text("DELETE FROM articles"))
+    db.session.commit()
 
 def tables():
   """Returns all table names from the database"""
