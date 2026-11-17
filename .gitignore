@@ -12,3 +12,4 @@ report.html
 secret.env
 playwright-log.txt
 .vscode
+.coverage
