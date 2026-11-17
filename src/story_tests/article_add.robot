@@ -1,5 +1,6 @@
 *** Settings ***
 Resource    resource.robot
+Test Setup    Reset Database
 Suite Setup    Open And Configure Browser
 Suite Teardown    Close Browser
 

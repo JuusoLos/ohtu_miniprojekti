@@ -10,6 +10,9 @@ ${BROWSER}    chromium
 ${HEADLESS}   false
 
 *** Keywords ***
+Reset Database
+    Go To    ${RESET_URL}
+
 Open And Configure Browser
     IF  $HEADLESS == 'true'
         New Browser  browser=${BROWSER}  headless=True
