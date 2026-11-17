@@ -1,10 +1,14 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from config import app, test_env
+from repositories.article_repository import get_articles
 
 @app.route("/")
 def index():
-    return render_template("index.html") 
+    return render_template(
+        "index.html",
+        articles=get_articles()
+    ) 
 
 if test_env:
     @app.route("/reset_db")

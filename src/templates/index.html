@@ -3,7 +3,18 @@
 {% block title %} Lähde viitteet {% endblock %} 
 {% block body %}
 
-<h1>Hello world!</h1>
+<h2>Lähteet</h2>
 
 <p><a href="/articles/new">Lisää artikkeli</a></p>
+
+<ul>
+  {% for article in articles %}
+    <li style="margin-bottom: 10px;">
+      {{ article.author }}. <strong>{{ article.title }}</strong>.<br>
+      <em>{{ article.journal }}</em>, {{ article.year }}.<br>
+      {{ article.citation_key }}
+    </li>
+  {% endfor %}
+</ul>
+
 {% endblock %}
