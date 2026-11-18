@@ -11,3 +11,5 @@ report.html
 !misc/*.png
 secret.env
 playwright-log.txt
+.vscode
+.coverage

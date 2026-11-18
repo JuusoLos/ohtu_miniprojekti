@@ -10,6 +10,9 @@ ${BROWSER}    chromium
 ${HEADLESS}   false
 
 *** Keywords ***
+Reset Database
+    Go To    ${RESET_URL}
+
 Open And Configure Browser
     IF  $HEADLESS == 'true'
         New Browser  browser=${BROWSER}  headless=True
@@ -18,3 +21,20 @@ Open And Configure Browser
     END
     New Context
     New Page  about:blank
+
+Create Article
+    [Arguments]    ${citation_key}=${EMPTY}
+    IF    '${citation_key}' == '${EMPTY}'
+        ${random}=    Evaluate    __import__('uuid').uuid4().hex[:10]
+        ${citation_key}=    Set Variable    TEST${random}
+    END
+
+    Go To    ${HOME_URL}/articles/new
+    Fill Text    css=input[name="citation_key"]    ${citation_key}
+    Fill Text    css=input[name="author"]    Testikirjoittaja
+    Fill Text    css=input[name="title"]    Testiartikkeli
+    Fill Text    css=input[name="journal"]    Testijulkaisu
+    Fill Text    css=input[name="year"]    2026
+    Click    css=button[type="submit"]
+
+    RETURN    ${citation_key}
