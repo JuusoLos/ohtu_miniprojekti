@@ -5,7 +5,7 @@ Pull requestit ja merget sujuivat hyvin.
 
 
 Kolme parannusehdotusta:
-1. Jaetaan sprintin työt aikaisemmin.
-2. Kommunikoidaan selkeillä viesteillä oman työn eteneminen muille ryhmäläisille.
+1. Jokaisella Sprint 2:n taskilla on vastuuhenkilö sprintin suunnittelun jälkeen.
+2. Jokainen ilmoittaa Discordissa työn valmistumisesta ja mahdollisista esteistä.
 3. Pull requesteista ilmoitetaan Discordissa muille.
-4. Tapaamisista sovitaan jatkossa hyvissä ajoin.
+4. Tapaamisten ajankohdat sovitaan vähintään edellisenä päivänä.
