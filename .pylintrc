@@ -2,20 +2,8 @@
 ignore=.venv
 
 [MESSAGES CONTROL]
-disable=
-    missing-module-docstring,
-    missing-class-docstring,
-    missing-function-docstring,
-    invalid-name,
-    too-few-public-methods,
-    broad-exception-caught,
-    duplicate-code,
-    import-error,
-    wrong-import-position,
-    wrong-import-order
-
-[FORMAT]
-max-line-length=100
-
-[DESIGN]
-max-args=8
+disable=all
+enable=
+    E,
+    unused-variable,
+    unused-argument
