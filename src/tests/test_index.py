@@ -1,7 +1,7 @@
 import pytest
-from sqlalchemy import text
 from config import app, db
 from db_helper import setup_db
+from repositories.article_repository import create_article
 
 @pytest.fixture
 def client(tmp_path):
@@ -33,22 +33,26 @@ def test_empty_list_has_no_cards(client):
 
 
 def test_two_articles_are_separate_labeled_cards(client):
+    articles = (
+        {
+            "citation_key": "TST1",
+            "author": "Testikirjoittaja",
+            "title": "Ensimmäinen otsikko",
+            "journal": "Testijulkaisu",
+            "year": 2026,
+        },
+        {
+            "citation_key": "TST2",
+            "author": "Testikirjoittaja",
+            "title": "Toinen otsikko",
+            "journal": "Testijulkaisu",
+            "year": 2026,
+        },
+    )
+
     with app.app_context():
-        query = text(
-            "INSERT INTO articles "
-            "(citation_key, author, title, journal, year) "
-            "VALUES (:citation_key, :author, :title, :journal, :year)"
-        )
-        for key, title in (("TST1", "Ensimmäinen otsikko"),
-                           ("TST2", "Toinen otsikko")):
-            db.session.execute(query, {
-                "citation_key": key,
-                "author": "Testikirjoittaja",
-                "title": title,
-                "journal": "Testijulkaisu",
-                "year": 2026,
-            })
-        db.session.commit()
+        for article in articles:
+            create_article(article)
 
     html = get_home(client)
     assert html.count('class="source-card"') == 2
