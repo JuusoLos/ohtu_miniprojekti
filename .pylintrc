@@ -1,0 +1,9 @@
+﻿[MAIN]
+ignore=.venv
+
+[MESSAGES CONTROL]
+disable=all
+enable=
+    E,
+    unused-variable,
+    unused-argument
