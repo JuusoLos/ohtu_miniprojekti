@@ -24,6 +24,8 @@
 
 <div class="reference-forms">
   <form class="reference-form-panel article-form" action="/articles" method="post">
+    <input type="hidden" name="type" value="artikkeli">
+
     <p>
       <label for="citation_key">Viiteavain</label><br>
       <input id="citation_key" name="citation_key" required
@@ -57,6 +59,8 @@
     <button type="submit">Tallenna artikkeli</button>
   </form>
   <form class="reference-form-panel article-book" action="/books" method="post">
+    <input type="hidden" name="type" value="book">
+
     <p>
       <label for="citation_key">Viiteavain</label><br>
       <input id="citation_key" name="citation_key" required
@@ -70,15 +74,15 @@
     </p>
 
     <p>
-      <label for="title">Otsikko</label><br>
+      <label for="title">Nimi</label><br>
       <input id="title" name="title" required
             value="{{ values.get('title', '') }}">
     </p>
 
     <p>
-      <label for="journal">Julkaisun nimi</label><br>
-      <input id="journal" name="journal" required
-            value="{{ values.get('journal', '') }}">
+      <label for="publisher">Kustantaja</label><br>
+      <input id="publisher" name="publisher" required
+            value="{{ values.get('publisher', '') }}">
     </p>
 
     <p>
@@ -86,10 +90,21 @@
       <input id="year" name="year" inputmode="numeric" required
             value="{{ values.get('year', '') }}">
     </p>
-
+    <p>
+      <label for="pages">Sivu numerot</label><br>
+      <input id="pages" name="pages" inputmode="text"
+            value="{{ values.get('pages', '') }}">
+    </p>
+    <p>
+      <label for="pages">Painos</label><br>
+      <input id="edition" name="edition" inputmode="text"
+            value="{{ values.get('edition', '') }}">
+    </p>
     <button type="submit">Tallenna kirja</button>
   </form>
   <form class="reference-form-panel article-conference" action="/conference" method="post">
+    <input type="hidden" name="type" value="conference">
+
     <p>
       <label for="citation_key">Viiteavain</label><br>
       <input id="citation_key" name="citation_key" required
@@ -109,9 +124,15 @@
     </p>
 
     <p>
-      <label for="journal">Julkaisun nimi</label><br>
-      <input id="journal" name="journal" required
-            value="{{ values.get('journal', '') }}">
+      <label for="conference_name">Konferenssin nimi</label><br>
+      <input id="conference_name" name="conference_name" required
+            value="{{ values.get('conference_name', '') }}">
+    </p>
+
+    <p>
+      <label for="conference_name">Sijainti kaupunki</label><br>
+      <input id="city" name="city" required
+            value="{{ values.get('city', '') }}">
     </p>
 
     <p>
