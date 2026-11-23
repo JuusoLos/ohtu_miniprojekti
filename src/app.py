@@ -1,13 +1,13 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from config import app, test_env
-from repositories.article_repository import get_articles
+from repositories.article_repository import get_references
 
 @app.route("/")
 def index():
     return render_template(
         "index.html",
-        articles=get_articles()
+        references=get_references()
     ) 
 
 if test_env:
@@ -17,7 +17,7 @@ if test_env:
         return jsonify({ 'message': "db reset" })
 
 
-@app.route("/articles/new", methods=["GET"])
+@app.route("/references/new", methods=["GET"])
 def new_article():
     return render_template(
         "new_article.html",
@@ -26,7 +26,7 @@ def new_article():
     )
 
 
-@app.route("/articles", methods=["POST"])
+@app.route("/references", methods=["POST"])
 def add_article():
     from repositories.article_repository import (
         create_article,
@@ -57,4 +57,4 @@ def add_article():
             error="Viiteavain on jo käytössä.",
         ), 409
 
-    return redirect("/articles/new?saved=1", code=303)
+    return redirect("/references/new?saved=1", code=303)

@@ -23,4 +23,4 @@ def get_home(client):
 def test_renders_heading_and_new_article_link(client):
     html = get_home(client)
     assert "Lähteet" in html
-    assert 'href="/articles/new"' in html
+    assert 'href="/references/new"' in html

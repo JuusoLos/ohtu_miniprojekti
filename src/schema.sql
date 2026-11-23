@@ -1,4 +1,4 @@
-CREATE TABLE articles (
+CREATE TABLE references (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     citation_key TEXT NOT NULL UNIQUE,
     author TEXT NOT NULL,
