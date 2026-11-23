@@ -1,8 +1,11 @@
+from dataclasses import dataclass
+
+@dataclass
 class Article:
-    def __init__(self, id, citation_key, author, title, journal, year):
-        self.id = id
-        self.citation_key = citation_key
-        self.author = author
-        self.title = title
-        self.journal = journal
-        self.year = year
+    id: int
+    citation_key: str
+    author: str
+    title: str
+    journal: str
+    year: int
+    type: str
