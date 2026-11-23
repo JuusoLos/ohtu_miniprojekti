@@ -90,16 +90,19 @@
       <input id="year" name="year" inputmode="numeric" required
             value="{{ values.get('year', '') }}">
     </p>
+
     <p>
       <label for="pages">Sivu numerot</label><br>
       <input id="pages" name="pages" inputmode="text"
             value="{{ values.get('pages', '') }}">
     </p>
+
     <p>
       <label for="pages">Painos</label><br>
       <input id="edition" name="edition" inputmode="text"
             value="{{ values.get('edition', '') }}">
     </p>
+    
     <button type="submit">Tallenna kirja</button>
   </form>
   <form class="reference-form-panel article-conference" action="/conference" method="post">
@@ -121,6 +124,12 @@
       <label for="title">Otsikko</label><br>
       <input id="title" name="title" required
             value="{{ values.get('title', '') }}">
+    </p>
+
+    <p>
+      <label for="pages">Sivu numerot</label><br>
+      <input id="pages" name="pages" inputmode="text"
+            value="{{ values.get('pages', '') }}">
     </p>
 
     <p>
