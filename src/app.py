@@ -64,6 +64,14 @@ def add_citation(fields, validate_reference, create_reference, type):
 
     return redirect(f"/citations/new?saved=1&type={type}", code=303)
 
+@app.route("/citations/delete", methods=["POST"])
+def delete_citations():
+    from repositories.citation_repository import delete_citations
+
+    citation_ids = request.form.getlist("citation_ids")
+    delete_citations([int(citation_id) for citation_id in citation_ids])
+    return redirect("/")
+
 @app.route("/articles", methods=["POST"])
 def add_article():
     return add_citation(("citation_key", "author", "title", "journal", "year", "type"), validate_article, create_article, "article")
