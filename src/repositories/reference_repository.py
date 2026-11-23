@@ -18,8 +18,8 @@ def get_articles():
 def create_article(article):
     sql = text(
         "INSERT INTO articles "
-        "(citation_key, author, title, journal, year) "
-        "VALUES (:citation_key, :author, :title, :journal, :year)"
+        "(citation_key, author, title, journal, year, type) "
+        "VALUES (:citation_key, :author, :title, :journal, :year, :type)"
     )
 
     try:
