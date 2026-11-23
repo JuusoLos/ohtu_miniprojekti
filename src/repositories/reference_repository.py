@@ -76,7 +76,7 @@ def create_book(book):
 def create_conference_article(conference_article):
     sql = text(
         "INSERT INTO references"
-        "(citation_key, author, title, journal, year, pages, conference_name, city, type) "
+        "(citation_key, author, title, journal, year, pages, conference_name, city, type)"
         "VALUES (:citation_key, :author, :title, :journal, :year, :pages, :conference_name, :city, :type)"
     )
 

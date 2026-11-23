@@ -3,12 +3,7 @@ import re
 FIELDS = ("citation_key", "author", "title", "journal", "year")
 
 
-def validate_article(values):
-    article = {
-        field: str(values.get(field, "")).strip()
-        for field in FIELDS
-    }
-
+def validate_article(article):
     if any(not value for value in article.values()):
         raise ValueError("Täytä kaikki pakolliset kentät.")
 

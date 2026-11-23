@@ -1,7 +1,8 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from config import app, test_env
-from repositories.reference_repository import get_references
+from repositories.reference_repository import get_references, create_book, create_article, create_conference_article, DuplicateCitationKeyError
+from validation import validate_article
 
 @app.route("/")
 def index():
@@ -20,28 +21,21 @@ if test_env:
 @app.route("/references/new", methods=["GET"])
 def new_article():
     return render_template(
-        "new_article.html",
+        "new_reference.html",
         values={},
         saved=request.args.get("saved") == "1",
     )
 
 
-@app.route("/article", methods=["POST"])
-def add_article():
-    from repositories.reference_repository import (
-        create_article,
-        DuplicateCitationKeyError,
-    )
-    from validation import validate_article
-
+def add_reference(fields, validate_reference, create_reference):
     values = {
         field: request.form.get(field, "").strip()
-        for field in ("citation_key", "author", "title", "journal", "year")
+        for field in fields
     }
 
     try:
-        article = validate_article(values)
-        create_article(article)
+        reference = validate_reference(values)
+        create_reference(reference)
 
     except ValueError as error:
         return render_template(
@@ -58,3 +52,16 @@ def add_article():
         ), 409
 
     return redirect("/references/new?saved=1", code=303)
+
+@app.route("/articles", methods=["POST"])
+def add_article():
+    return add_reference(("citation_key", "author", "title", "journal", "year", "type"), validate_article, create_article)
+
+@app.route("/books", methods=["POST"])
+def add_book():
+    return add_reference(("citation_key", "author", "title", "year", "pages", "publisher", "type"),  validate_book, create_book)
+
+@app.route("/conference_articles", methods=["POST"])
+def add_book():
+    return add_reference(("citation_key", "author", "title", "journal", "year", "pages", "conference_name", "city", "type"),  validate_book, create_book)
+

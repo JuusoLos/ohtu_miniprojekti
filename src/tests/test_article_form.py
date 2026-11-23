@@ -12,7 +12,7 @@ os.environ.setdefault("SECRET_KEY", "test-secret")
 
 from config import app
 import app as web_routes
-from repositories.article_repository import DuplicateCitationKeyError
+from repositories.reference_repository import DuplicateCitationKeyError
 
 
 class ArticleFormTests(unittest.TestCase):
