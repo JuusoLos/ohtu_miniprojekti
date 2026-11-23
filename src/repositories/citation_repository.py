@@ -1,5 +1,5 @@
 import inspect
-from sqlalchemy import text
+from sqlalchemy import bindparam, text
 from sqlalchemy.exc import IntegrityError
 
 from config import db
@@ -92,4 +92,16 @@ def create_conference_article(conference_article):
         db.session.commit()
     except IntegrityError as error:
         db.session.rollback()
-        raise DuplicateCitationKeyError from error        
+        raise DuplicateCitationKeyError from error
+
+def delete_citations(citation_ids):
+    if not citation_ids:
+        return
+
+    sql = text(
+        "DELETE FROM citations "
+        "WHERE id IN :citation_ids"
+    ).bindparams(bindparam("citation_ids", expanding=True))
+
+    db.session.execute(sql, {"citation_ids": citation_ids})
+    db.session.commit()
