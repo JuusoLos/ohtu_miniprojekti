@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from config import app, test_env
-from repositories.article_repository import get_references
+from repositories.reference_repository import get_references
 
 @app.route("/")
 def index():
@@ -28,7 +28,7 @@ def new_article():
 
 @app.route("/article", methods=["POST"])
 def add_article():
-    from repositories.article_repository import (
+    from repositories.reference_repository import (
         create_article,
         DuplicateCitationKeyError,
     )
@@ -61,7 +61,7 @@ def add_article():
 
 @app.route("/book", methods=["POST"])
 def add_article():
-    from repositories.article_repository import (
+    from repositories.reference_repository import (
         create_article,
         DuplicateCitationKeyError,
     )
