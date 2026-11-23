@@ -7,11 +7,13 @@
 }
 
 .source-card {
+  position: relative;
   box-sizing: border-box;
   border: 1px solid #cbd5e1;
   border-left: 3px solid #42669a;
   border-radius: 6px;
   padding: 8px 12px;
+  padding-left: 36px;
   margin-bottom: 8px;
   background: #fff;
   overflow-wrap: anywhere;
@@ -51,4 +53,15 @@
 
 .source-card-field dd {
   margin: 0;
+}
+
+.source-card-checkbox {
+  position: absolute;
+  top: 50%;
+  left: 18px;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
