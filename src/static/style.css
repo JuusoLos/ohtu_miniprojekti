@@ -1,0 +1,27 @@
+.reference-form-choice {
+  position: absolute;
+  opacity: 0;
+}
+
+.reference-form-choice + label {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 1px solid #999;
+  cursor: pointer;
+}
+
+.reference-form-choice:checked + label {
+  background: #e8e8e8;
+  border-color: #333;
+}
+
+.reference-form-panel {
+  display: none;
+  margin-top: 1rem;
+}
+
+#article-form:checked ~ .reference-forms .article-form,
+#article-book:checked ~ .reference-forms .article-book,
+#article-conference:checked ~ .reference-forms .article-conference {
+  display: block;
+}
