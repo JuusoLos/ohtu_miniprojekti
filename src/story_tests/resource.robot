@@ -31,12 +31,12 @@ Create Article
 
     Go To    ${HOME_URL}/citations/new
     Click    css=input[id="article-form"]
-    Fill Text    css=input[name="citation_key"]    ${citation_key}
-    Fill Text    css=input[name="author"]    Testikirjoittaja
-    Fill Text    css=input[name="title"]    Testiartikkeli
-    Fill Text    css=input[name="journal"]    Testijulkaisu
-    Fill Text    css=input[name="year"]    2026
-    Click    css=button[type="submit"]
+    Fill Text    css=input[id="article-citation_key"]    ${citation_key}
+    Fill Text    css=input[id="article-author"]    Testikirjoittaja
+    Fill Text    css=input[id="article-title"]    Testiartikkeli
+    Fill Text    css=input[id="article-journal"]    Testijulkaisu
+    Fill Text    css=input[id="article-year"]    2026
+    Click    css=button[id="article-submit"]
 
     RETURN    ${citation_key}
 
@@ -49,14 +49,14 @@ Create Book
 
     Go To    ${HOME_URL}/citations/new
     Click    css=input[id="book-form"]
-    Fill Text    css=input[name="citation_key"]    ${citation_key}
-    Fill Text    css=input[name="author"]    Testikirjoittaja
-    Fill Text    css=input[name="title"]    Testikirja
-    Fill Text    css=input[name="publisher"]    Testijulkaisija
-    Fill Text    css=input[name="year"]    2026
-    Fill Text    css=input[name="pages"]    1-12
-    Fill Text    css=input[name="edition"]    1
-    Click    css=button[type="submit"]
+    Fill Text    css=input[id="book-citation_key"]    ${citation_key}
+    Fill Text    css=input[id="book-author"]    Testikirjoittaja
+    Fill Text    css=input[id="book-title"]    Testikirja
+    Fill Text    css=input[id="book-publisher"]    Testijulkaisija
+    Fill Text    css=input[id="book-year"]    2026
+    Fill Text    css=input[id="book-pages"]    1-12
+    Fill Text    css=input[id="book-edition"]    1
+    Click    css=button[id="book-submit"]
 
     RETURN    ${citation_key}
 
@@ -69,12 +69,13 @@ Create Conference Article
 
     Go To    ${HOME_URL}/citations/new
     Click    css=input[id="conference-article-form"]
-    Fill Text     css=input[name="citation_key"]    ${citation_key}
-    Fill Text     css=input[name="author"]    Testikirjoittaja
-    Fill Text     css=input[name="title"]    Testijulkaisu
-    Fill Text     css=input[name="pages"]    1-23
-    Fill Text     css=input[name="conference_name"]    Testikonferenssi
-    Fill Text     css=input[name="city"]   Testikaupunki
-    Fill Text     css=input[name="year"]    2026
-    Click    css=button[type="submit"]
+    Fill Text     css=input[id="conf-citation_key"]    ${citation_key}
+    Fill Text     css=input[id="conf-author"]    Testikirjoittaja
+    Fill Text     css=input[id="conf-title"]    Testijulkaisu
+    Fill Text     css=input[id="conf-pages"]    1-23
+    Fill Text     css=input[id="conf-conference_name"]    Testikonferenssi
+    Fill Text     css=input[id="conf-city"]   Testikaupunki
+    Fill Text     css=input[id="conf-year"]    2026
+    Click    css=button[id="conf-submit"]
+
     RETURN    ${citation_key}

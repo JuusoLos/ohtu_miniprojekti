@@ -1,3 +1,4 @@
+import inspect
 from sqlalchemy import text
 from sqlalchemy.exc import IntegrityError
 
@@ -9,6 +10,12 @@ from entities.conference_article import ConferenceArticle
 
 class DuplicateCitationKeyError(Exception):
     """Viiteavain on jo kaytossa."""
+
+def row_to_model(cls, row):
+    params = inspect.signature(cls.__init__).parameters
+    fields = [p for p in params if p != "self"]
+    data = row._mapping
+    return cls(**{f: data[f] for f in fields})
 
 def get_articles():
     sql = text("SELECT * FROM citations WHERE type='article'")
@@ -37,11 +44,11 @@ def get_citations():
     for row in rows:
         match row[-1]:
             case "article":
-                citations.append(Article(*filter(row)))
+                citations.append(row_to_model(Article, row))
             case "book":
-                citations.append(Book(*filter(row)))
+                citations.append(Book, row)
             case "conference":
-                citations.append(ConferenceArticle(*filter(row)))    
+                citations.append(ConferenceArticle, row)    
 
     return citations
 

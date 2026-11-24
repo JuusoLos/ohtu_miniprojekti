@@ -9,19 +9,19 @@ Artikkelin lisääminen ja viiteavaimen yksilöllisyys
     ${citation_key}=    Create Article
 
     Create Article    ${citation_key}
-
-    Get Text    css=[role="alert"]    ==    Viiteavain on jo käytössä.
+    Sleep    0.1s
+    Get Text    css=p[role="alert"]    ==    Viiteavain on jo käytössä.
 
 Kirjan lisääminen ja viiteavaimen yksilöllisyys
     ${citation_key}=    Create Book
 
-    Create Article    ${citation_key}
-
-    Get Text    css=[role="alert"]    ==    Viiteavain on jo käytössä.
+    Create Book    ${citation_key}
+    Sleep    0.1s
+    Get Text    css=p[role="alert"]    ==    Viiteavain on jo käytössä.
 
 Konferenssi julkaisun lisääminen ja viiteavaimen yksilöllisyys
     ${citation_key}=    Create Conference Article
 
     Create Conference Article    ${citation_key}
-
-    Get Text    css=[role="alert"]    ==    Viiteavain on jo käytössä.    
+    Sleep    0.1s
+    Get Text    css=p[role="alert"]    ==    Viiteavain on jo käytössä.   

@@ -66,4 +66,4 @@ def add_conference_article():
     return add_citation(("citation_key", "author", "title", "year", "conference_name", "city", "type"),  validate_conference_article, create_conference_article)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=5001)

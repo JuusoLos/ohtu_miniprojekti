@@ -52,7 +52,7 @@
              value="{{ values.get('year', '') }}">
     </p>
 
-    <button type="submit">Tallenna artikkeli</button>
+    <button id="article-submit" type="submit">Tallenna artikkeli</button>
   </form>
 
   <form class="reference-form-panel book-form" action="/books" method="post">
@@ -94,11 +94,11 @@
              value="{{ values.get('edition', '') }}">
     </p>
 
-    <button type="submit">Tallenna kirja</button>
+    <button id="book-submit" type="submit">Tallenna kirja</button>
   </form>
 
   <form class="reference-form-panel conference-article-form" action="/conference_articles" method="post">
-    <input type="hidden" name="type" value="conference">
+    <input type="hidden" name="type" value="conference_article">
 
     <p>
       <label for="conf-citation_key">Viiteavain</label><br>
@@ -136,7 +136,7 @@
              value="{{ values.get('year', '') }}">
     </p>
 
-    <button type="submit">Tallenna konferenssijulkaisu</button>
+    <button id="conf-submit" type="submit">Tallenna konferenssijulkaisu</button>
   </form>
 </div>
 

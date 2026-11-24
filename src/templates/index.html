@@ -7,9 +7,9 @@
 
 <p><a href="/citations/new">Lisää lähde</a></p>
 
-{% if articles %}
+{% if citations %}
 <ul>
-  {% for article in articles %}
+  {% for article in citations %}
     <li style="margin-bottom: 10px;">
       {{ article.author }}. <strong>{{ article.title }}</strong>.<br>
       <em>{{ article.journal }}</em>, {{ article.year }}.<br>
