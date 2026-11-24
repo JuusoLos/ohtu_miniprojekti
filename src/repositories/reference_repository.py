@@ -62,8 +62,8 @@ def create_article(article):
 def create_book(book):
     sql = text(
         "INSERT INTO references"
-        "(citation_key, author, title, year, pages, publisher, type)"
-        "VALUES (:citation_key, :author, :title, :year, :pages, :publisher, :type)"
+        "(citation_key, author, title, year, pages, publisher, edition, type)"
+        "VALUES (:citation_key, :author, :title, :year, :pages, :publisher, :edition, :type)"
     )
 
     try:

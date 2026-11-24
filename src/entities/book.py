@@ -9,4 +9,5 @@ class Book:
     year: int
     pages: str
     publisher: str
+    edition: int 
     type: str

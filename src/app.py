@@ -2,7 +2,7 @@ from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from config import app, test_env
 from repositories.reference_repository import get_references, create_book, create_article, create_conference_article, DuplicateCitationKeyError
-from validation import validate_article
+from validation import validate_article, validate_book, validate_conference_article
 
 @app.route("/")
 def index():
@@ -59,9 +59,8 @@ def add_article():
 
 @app.route("/books", methods=["POST"])
 def add_book():
-    return add_reference(("citation_key", "author", "title", "year", "pages", "publisher", "type"),  validate_book, create_book)
+    return add_reference(("citation_key", "author", "title", "year", "pages", "publisher", "edition", "type"),  validate_book, create_book)
 
 @app.route("/conference_articles", methods=["POST"])
-def add_book():
-    return add_reference(("citation_key", "author", "title", "journal", "year", "pages", "conference_name", "city", "type"),  validate_book, create_book)
-
+def add_conference_article():
+    return add_reference(("citation_key", "author", "title", "journal", "year", "pages", "conference_name", "city", "type"),  validate_conference_article, create_conference_article)
