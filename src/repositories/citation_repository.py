@@ -23,7 +23,7 @@ def get_books():
     return [Book(*row) for row in books]
 
 def get_conference_article():
-    sql = text("SELECT * FROM citations WHERE type='conference'")
+    sql = text("SELECT * FROM citations WHERE type='conference_article'")
     result = db.session.execute(sql)
     conference_articles = result.fetchall()
     return [ConferenceArticle(*row) for row in conference_articles]
@@ -47,7 +47,7 @@ def get_citations():
 
 def create_article(article):
     sql = text(
-        "INSERT INTO citations"
+        "INSERT INTO citations "
         "(citation_key, author, title, journal, year, type) "
         "VALUES (:citation_key, :author, :title, :journal, :year, :type)"
     )
@@ -61,8 +61,8 @@ def create_article(article):
 
 def create_book(book):
     sql = text(
-        "INSERT INTO citations"
-        "(citation_key, author, title, year, pages, publisher, edition, type)"
+        "INSERT INTO citations "
+        "(citation_key, author, title, year, pages, publisher, edition, type) "
         "VALUES (:citation_key, :author, :title, :year, :pages, :publisher, :edition, :type)"
     )
 
@@ -75,9 +75,9 @@ def create_book(book):
 
 def create_conference_article(conference_article):
     sql = text(
-        "INSERT INTO citations"
-        "(citation_key, author, title, journal, year, pages, conference_name, city, type)"
-        "VALUES (:citation_key, :author, :title, :journal, :year, :pages, :conference_name, :city, :type)"
+        "INSERT INTO citations "
+        "(citation_key, author, title, year, conference_name, city, type) "
+        "VALUES (:citation_key, :author, :title, :year, :conference_name, :city, :type)"
     )
 
     try:

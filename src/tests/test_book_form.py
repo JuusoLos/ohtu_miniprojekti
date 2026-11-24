@@ -25,15 +25,16 @@ class BookFormTests(unittest.TestCase):
             "pages": "672",
             "publisher": "Addison-Wesley",
             "edition":  3,
+            "type": "book"
         }
 
     def test_form_opens(self):
-        response = self.client.get("/books/new")
+        response = self.client.get("/citations/new")
 
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'name="citation_key"', response.data)
 
-    @patch("repositories.citation_repository.create_book")
+    @patch("app.create_book")
     def test_valid_book_is_passed_to_storage(self, create_book):
         response = self.client.post(
             "/books",
@@ -50,6 +51,7 @@ class BookFormTests(unittest.TestCase):
             "pages": "672",
             "publisher": "Addison-Wesley",
             "edition":  3,
+            "type": "book"
         })
 
     def test_missing_title_is_rejected(self):
@@ -60,9 +62,9 @@ class BookFormTests(unittest.TestCase):
 
         self.assertEqual(response.status_code, 400)
 
-    def test_missing_publisher_is_rejected(self):
+    def test_missing_title_is_rejected(self):
         values = self.valid_book.copy()
-        values["publisher"] = ""
+        values["title"] = ""
 
         response = self.client.post("/books", data=values)
 
@@ -76,7 +78,7 @@ class BookFormTests(unittest.TestCase):
 
         self.assertEqual(response.status_code, 400)
 
-    @patch("repositories.citation_repository.create_book")
+    @patch("app.create_book")
     def test_duplicate_key_shows_error(self, create_book):
         create_book.side_effect = DuplicateCitationKeyError()
 

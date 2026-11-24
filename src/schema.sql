@@ -8,5 +8,7 @@ CREATE TABLE citations (
     pages TEXT,
     publisher TEXT,
     edition TEXT,
+    conference_name TEXT,
+    city TEXT,
     type TEXT NOT NULL
 );

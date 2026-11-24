@@ -2,7 +2,7 @@ import os
 import sys
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 SRC = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(SRC))
@@ -23,15 +23,16 @@ class ArticleFormTests(unittest.TestCase):
             "title": "Test article",
             "journal": "Test Journal",
             "year": "1991",
+            "type": "article"
         }
 
     def test_form_opens(self):
-        response = self.client.get("/articles/new")
+        response = self.client.get("/citations/new")
 
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'name="citation_key"', response.data)
 
-    @patch("repositories.citation_repository.create_article")
+    @patch("app.create_article")
     def test_valid_article_is_passed_to_storage(self, create_article):
         response = self.client.post(
             "/articles",
@@ -46,6 +47,7 @@ class ArticleFormTests(unittest.TestCase):
             "title": "Test article",
             "journal": "Test Journal",
             "year": 1991,
+            "type": "article"
         })
 
     def test_missing_title_is_rejected(self):
@@ -64,7 +66,7 @@ class ArticleFormTests(unittest.TestCase):
 
         self.assertEqual(response.status_code, 400)
 
-    @patch("repositories.citation_repository.create_article")
+    @patch("app.create_article")
     def test_duplicate_key_shows_error(self, create_article):
         create_article.side_effect = DuplicateCitationKeyError()
 

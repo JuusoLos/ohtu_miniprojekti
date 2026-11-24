@@ -36,7 +36,7 @@ class CitationSchemaTests(unittest.TestCase):
         self.connection.execute(
             "INSERT INTO citations"
             "(citation_key, author, title, year, pages, publisher, edition, type)"
-            "VALUES (?, ?, ?, ?, ?, ?, ?)",
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
             ("knuth1997art", "Donald E. Knuth", "The Art of Computer Programming, Volume 1: Fundamental Algorithms", 1997, "672", "Addison-Wesley", 3, "book")
         )
 
@@ -51,6 +51,7 @@ class CitationSchemaTests(unittest.TestCase):
         self.connection.execute(
             "INSERT INTO citations"
             "(citation_key, author, title, journal, year, pages, conference_name, city, type)"
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             ("smith2021deep", "John A. Smith", "Deep Learning Approaches for Medical Image Segmentation", "IEEE Transactions on Medical Imaging", 2021, "1123-1136", "International Conference on Medical Image Computing", "Helsinki", "conference_article")
         )
 
@@ -80,7 +81,7 @@ class CitationSchemaTests(unittest.TestCase):
         with self.assertRaises(sqlite3.IntegrityError):
             self.connection.execute(
                 "INSERT INTO citations "
-                "(citation_key, author, title, journal, year) "
+                "(citation_key, author, title, journal, year, type) "
                 "VALUES (?, ?, ?, ?, ?, ?)",
                 ("TEST", "Author", None, "Journal", 2026, "article"),
             )

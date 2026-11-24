@@ -11,6 +11,7 @@ os.environ.setdefault("DATABASE_URL", "sqlite://")
 os.environ.setdefault("SECRET_KEY", "test-secret")
 
 from config import app
+import app as web_routes  # registers the routes
 from repositories.citation_repository import DuplicateCitationKeyError
 
 
@@ -22,18 +23,18 @@ class ConferenceArticleFormTests(unittest.TestCase):
             "author": "John A. Smith",
             "title": "Deep Learning Approaches for Medical Image Segmentation",
             "year": "2021",
-            "pages": "1123-1136",
             "conference_name": "International Conference on Medical Image Computing",
             "city": "Helsinki",
+            "type": "conference_article",
         }
 
     def test_form_opens(self):
-        response = self.client.get("/conference_articles/new")
+        response = self.client.get("/citations/new")
 
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'name="citation_key"', response.data)
 
-    @patch("repositories.citation_repository.create_conference_article")
+    @patch.object(web_routes, "create_conference_article")
     def test_valid_conference_article_is_passed_to_storage(self, create_conference_article):
         response = self.client.post(
             "/conference_articles",
@@ -42,15 +43,21 @@ class ConferenceArticleFormTests(unittest.TestCase):
 
         self.assertEqual(response.status_code, 303)
 
-        create_conference_article.assert_called_once_with({
+        create_conference_article.assert_called_once()
+        saved = create_conference_article.call_args.args[0]
+
+        expected = {
             "citation_key": "smith2021deep",
             "author": "John A. Smith",
             "title": "Deep Learning Approaches for Medical Image Segmentation",
             "year": 2021,
-            "pages": "1123-1136",
             "conference_name": "International Conference on Medical Image Computing",
             "city": "Helsinki",
-        })
+            "type": "conference_article",
+        }
+        for key, value in expected.items():
+            self.assertIn(key, saved)
+            self.assertEqual(saved[key], value)
 
     def test_missing_title_is_rejected(self):
         values = self.valid_conference_article.copy()
@@ -76,7 +83,7 @@ class ConferenceArticleFormTests(unittest.TestCase):
 
         self.assertEqual(response.status_code, 400)
 
-    @patch("repositories.citation_repository.create_conference_article")
+    @patch.object(web_routes, "create_conference_article")
     def test_duplicate_key_shows_error(self, create_conference_article):
         create_conference_article.side_effect = DuplicateCitationKeyError()
 
