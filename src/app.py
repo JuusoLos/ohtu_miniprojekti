@@ -1,14 +1,14 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from config import app, test_env
-from repositories.reference_repository import get_references, create_book, create_article, create_conference_article, DuplicateCitationKeyError
+from repositories.citation_repository import get_citations, create_book, create_article, create_conference_article, DuplicateCitationKeyError
 from validation import validate_article, validate_book, validate_conference_article
 
 @app.route("/")
 def index():
     return render_template(
         "index.html",
-        references=get_references()
+        citations=get_citations()
     ) 
 
 if test_env:
@@ -18,7 +18,7 @@ if test_env:
         return jsonify({ 'message': "db reset" })
 
 
-@app.route("/references/new", methods=["GET"])
+@app.route("/citations/new", methods=["GET"])
 def new_article():
     return render_template(
         "new_reference.html",
@@ -51,7 +51,7 @@ def add_reference(fields, validate_reference, create_reference):
             error="Viiteavain on jo käytössä.",
         ), 409
 
-    return redirect("/references/new?saved=1", code=303)
+    return redirect("/citations/new?saved=1", code=303)
 
 @app.route("/articles", methods=["POST"])
 def add_article():

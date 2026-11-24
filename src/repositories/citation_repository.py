@@ -11,43 +11,43 @@ class DuplicateCitationKeyError(Exception):
     """Viiteavain on jo kaytossa."""
 
 def get_articles():
-    sql = text("SELECT * FROM references WHERE type='article'")
+    sql = text("SELECT * FROM citations WHERE type='article'")
     result = db.session.execute(sql)
     articles = result.fetchall()
     return [Article(*row) for row in articles]
 
 def get_books():
-    sql = text("SELECT * FROM references WHERE type='book'")
+    sql = text("SELECT * FROM citations WHERE type='book'")
     result = db.session.execute(sql)
     books = result.fetchall()
     return [Book(*row) for row in books]
 
 def get_conference_article():
-    sql = text("SELECT * FROM references WHERE type='conference'")
+    sql = text("SELECT * FROM citations WHERE type='conference'")
     result = db.session.execute(sql)
     conference_articles = result.fetchall()
     return [ConferenceArticle(*row) for row in conference_articles]
 
-def get_references():
-    sql = text("SELECT * FROM references")
+def get_citations():
+    sql = text("SELECT * FROM citations")
     result = db.session.execute(sql)
     rows = result.fetchall()
     
-    references = [] 
+    citations = [] 
     for row in rows:
         match row[-1]:
             case "article":
-                references.append(Article(*filter(row)))
+                citations.append(Article(*filter(row)))
             case "book":
-                references.append(Book(*filter(row)))
+                citations.append(Book(*filter(row)))
             case "conference":
-                references.append(ConferenceArticle(*filter(row)))    
+                citations.append(ConferenceArticle(*filter(row)))    
 
-    return references
+    return citations
 
 def create_article(article):
     sql = text(
-        "INSERT INTO references"
+        "INSERT INTO citations"
         "(citation_key, author, title, journal, year, type) "
         "VALUES (:citation_key, :author, :title, :journal, :year, :type)"
     )
@@ -61,7 +61,7 @@ def create_article(article):
 
 def create_book(book):
     sql = text(
-        "INSERT INTO references"
+        "INSERT INTO citations"
         "(citation_key, author, title, year, pages, publisher, edition, type)"
         "VALUES (:citation_key, :author, :title, :year, :pages, :publisher, :edition, :type)"
     )
@@ -75,7 +75,7 @@ def create_book(book):
 
 def create_conference_article(conference_article):
     sql = text(
-        "INSERT INTO references"
+        "INSERT INTO citations"
         "(citation_key, author, title, journal, year, pages, conference_name, city, type)"
         "VALUES (:citation_key, :author, :title, :journal, :year, :pages, :conference_name, :city, :type)"
     )

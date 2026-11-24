@@ -1,4 +1,4 @@
-CREATE TABLE "references" (
+CREATE TABLE citations (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     citation_key TEXT NOT NULL UNIQUE,
     author TEXT NOT NULL,
@@ -7,5 +7,6 @@ CREATE TABLE "references" (
     year INTEGER NOT NULL,
     pages TEXT,
     publisher TEXT,
+    edition TEXT,
     type TEXT NOT NULL
 );

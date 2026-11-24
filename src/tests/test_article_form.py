@@ -12,8 +12,7 @@ os.environ.setdefault("SECRET_KEY", "test-secret")
 
 from config import app
 import app as web_routes
-from repositories.reference_repository import DuplicateCitationKeyError
-
+from repositories.citation_repository import DuplicateCitationKeyError
 
 class ArticleFormTests(unittest.TestCase):
     def setUp(self):
@@ -32,7 +31,7 @@ class ArticleFormTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'name="citation_key"', response.data)
 
-    @patch("repositories.article_repository.create_article")
+    @patch("repositories.citation_repository.create_article")
     def test_valid_article_is_passed_to_storage(self, create_article):
         response = self.client.post(
             "/articles",
@@ -65,7 +64,7 @@ class ArticleFormTests(unittest.TestCase):
 
         self.assertEqual(response.status_code, 400)
 
-    @patch("repositories.article_repository.create_article")
+    @patch("repositories.citation_repository.create_article")
     def test_duplicate_key_shows_error(self, create_article):
         create_article.side_effect = DuplicateCitationKeyError()
 

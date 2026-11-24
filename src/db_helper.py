@@ -4,7 +4,7 @@ import os
 
 def reset_db():
     """Tyhjentaa artikkelitaulun testeja varten."""
-    db.session.execute(text("DELETE FROM references"))
+    db.session.execute(text("DELETE FROM citations"))
     db.session.commit()
 
 def tables():

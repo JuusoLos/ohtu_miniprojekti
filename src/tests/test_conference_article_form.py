@@ -11,7 +11,7 @@ os.environ.setdefault("DATABASE_URL", "sqlite://")
 os.environ.setdefault("SECRET_KEY", "test-secret")
 
 from config import app
-from repositories.reference_repository import DuplicateCitationKeyError
+from repositories.citation_repository import DuplicateCitationKeyError
 
 
 class ConferenceArticleFormTests(unittest.TestCase):
@@ -33,7 +33,7 @@ class ConferenceArticleFormTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'name="citation_key"', response.data)
 
-    @patch("repositories.reference_repository.create_conference_article")
+    @patch("repositories.citation_repository.create_conference_article")
     def test_valid_conference_article_is_passed_to_storage(self, create_conference_article):
         response = self.client.post(
             "/conference_articles",
@@ -76,7 +76,7 @@ class ConferenceArticleFormTests(unittest.TestCase):
 
         self.assertEqual(response.status_code, 400)
 
-    @patch("repositories.reference_repository.create_conference_article")
+    @patch("repositories.citation_repository.create_conference_article")
     def test_duplicate_key_shows_error(self, create_conference_article):
         create_conference_article.side_effect = DuplicateCitationKeyError()
 

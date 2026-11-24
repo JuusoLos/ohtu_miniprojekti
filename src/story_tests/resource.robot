@@ -29,7 +29,7 @@ Create Article
         ${citation_key}=    Set Variable    TEST${random}
     END
 
-    Go To    ${HOME_URL}/references/new
+    Go To    ${HOME_URL}/citations/new
     Click    css=input[id="article-form"]
     Fill Text    css=input[name="citation_key"]    ${citation_key}
     Fill Text    css=input[name="author"]    Testikirjoittaja
@@ -47,7 +47,7 @@ Create Book
         ${citation_key}=    Set Variable    TEST${random}
     END
 
-    Go To    ${HOME_URL}/references/new
+    Go To    ${HOME_URL}/citations/new
     Click    css=input[id="book-form"]
     Fill Text    css=input[name="citation_key"]    ${citation_key}
     Fill Text    css=input[name="author"]    Testikirjoittaja
@@ -67,7 +67,7 @@ Create Conference Article
         ${citation_key}=    Set Variable    TEST${random}
     END
 
-    Go To    ${HOME_URL}/references/new
+    Go To    ${HOME_URL}/citations/new
     Click    css=input[id="conference-article-form"]
     Fill Text     css=input[name="citation_key"]    ${citation_key}
     Fill Text     css=input[name="author"]    Testikirjoittaja
