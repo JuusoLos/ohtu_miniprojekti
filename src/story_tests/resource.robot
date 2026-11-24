@@ -29,7 +29,8 @@ Create Article
         ${citation_key}=    Set Variable    TEST${random}
     END
 
-    Go To    ${HOME_URL}/articles/new
+    Go To    ${HOME_URL}/references/new
+    Click    css=input[id="article-form"]
     Fill Text    css=input[name="citation_key"]    ${citation_key}
     Fill Text    css=input[name="author"]    Testikirjoittaja
     Fill Text    css=input[name="title"]    Testiartikkeli
@@ -37,4 +38,43 @@ Create Article
     Fill Text    css=input[name="year"]    2026
     Click    css=button[type="submit"]
 
+    RETURN    ${citation_key}
+
+Create Book
+    [Arguments]    ${citation_key}=${EMPTY}
+    IF    '${citation_key}' == '${EMPTY}'
+        ${random}=    Evaluate    __import__('uuid').uuid4().hex[:10]
+        ${citation_key}=    Set Variable    TEST${random}
+    END
+
+    Go To    ${HOME_URL}/references/new
+    Click    css=input[id="book-form"]
+    Fill Text    css=input[name="citation_key"]    ${citation_key}
+    Fill Text    css=input[name="author"]    Testikirjoittaja
+    Fill Text    css=input[name="title"]    Testikirja
+    Fill Text    css=input[name="publisher"]    Testijulkaisija
+    Fill Text    css=input[name="year"]    2026
+    Fill Text    css=input[name="pages"]    1-12
+    Fill Text    css=input[name="edition"]    1
+    Click    css=button[type="submit"]
+
+    RETURN    ${citation_key}
+
+Create Conference Article
+    [Arguments]    ${citation_key}=${EMPTY}
+    IF    '${citation_key}' == '${EMPTY}'
+        ${random}=    Evaluate    __import__('uuid').uuid4().hex[:10]
+        ${citation_key}=    Set Variable    TEST${random}
+    END
+
+    Go To    ${HOME_URL}/references/new
+    Click    css=input[id="conference-article-form"]
+    Fill Text     css=input[name="citation_key"]    ${citation_key}
+    Fill Text     css=input[name="author"]    Testikirjoittaja
+    Fill Text     css=input[name="title"]    Testijulkaisu
+    Fill Text     css=input[name="pages"]    1-23
+    Fill Text     css=input[name="conference_name"]    Testikonferenssi
+    Fill Text     css=input[name="city"]   Testikaupunki
+    Fill Text     css=input[name="year"]    2026
+    Click    css=button[type="submit"]
     RETURN    ${citation_key}
