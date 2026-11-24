@@ -16,15 +16,15 @@
 <input class="reference-form-choice" type="radio" id="article-form" name="reference-form-choice" checked>
 <label for="article-form">Artikkeli</label>
 
-<input class="reference-form-choice" type="radio" id="article-book" name="reference-form-choice">
+<input class="reference-form-choice" type="radio" id="book-form" name="reference-form-choice">
 <label for="article-book">Kirja</label>
 
-<input class="reference-form-choice" type="radio" id="article-conference" name="reference-form-choice">
+<input class="reference-form-choice" type="radio" id="conference-articel-form" name="reference-form-choice">
 <label for="article-conference">Konferenssi julkaisu</label>
 
 <div class="reference-forms">
   <form class="reference-form-panel article-form" action="/articles" method="post">
-    <input type="hidden" name="type" value="artikkeli">
+    <input type="hidden" name="type" value="article">
 
     <p>
       <label for="citation_key">Viiteavain</label><br>
@@ -59,7 +59,7 @@
     <button type="submit">Tallenna artikkeli</button>
   </form>
 
-  <form class="reference-form-panel article-book" action="/books" method="post">
+  <form class="reference-form-panel book-form" action="/books" method="post">
     <input type="hidden" name="type" value="book">
 
     <p>
@@ -107,7 +107,7 @@
     <button type="submit">Tallenna kirja</button>
   </form>
 
-  <form class="reference-form-panel article-conference" action="/conference_articles" method="post">
+  <form class="reference-form-panel conference-articel-form" action="/conference_articles" method="post">
     <input type="hidden" name="type" value="conference">
 
     <p>
