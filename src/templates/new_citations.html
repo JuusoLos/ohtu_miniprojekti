@@ -13,19 +13,17 @@
   <p role="alert">{{ error }}</p>
 {% endif %}
 
-<input class="reference-form-choice" type="radio" id="article-form" name="reference-form-choice" checked>
+<input class="reference-form-choice" type="radio" id="article-form" name="reference-form-choice" {% if type == "article"%} checked {% endif %}>
 <label for="article-form">Artikkeli</label>
 
-<input class="reference-form-choice" type="radio" id="book-form" name="reference-form-choice">
+<input class="reference-form-choice" type="radio" id="book-form" name="reference-form-choice" {% if type == "book"%} checked {% endif %}>
 <label for="book-form">Kirja</label>
 
-<input class="reference-form-choice" type="radio" id="conference-article-form" name="reference-form-choice">
+<input class="reference-form-choice" type="radio" id="conference-article-form" name="reference-form-choice"  {% if type == "conference_article"%} checked {% endif %}>
 <label for="conference-article-form">Konferenssijulkaisu</label>
 
 <div class="reference-forms">
   <form class="reference-form-panel article-form" action="/articles" method="post">
-    <input type="hidden" name="type" value="article">
-
     <p>
       <label for="article-citation_key">Viiteavain</label><br>
       <input id="article-citation_key" name="citation_key" required
@@ -56,8 +54,6 @@
   </form>
 
   <form class="reference-form-panel book-form" action="/books" method="post">
-    <input type="hidden" name="type" value="book">
-
     <p>
       <label for="book-citation_key">Viiteavain</label><br>
       <input id="book-citation_key" name="citation_key" required
@@ -98,8 +94,6 @@
   </form>
 
   <form class="reference-form-panel conference-article-form" action="/conference_articles" method="post">
-    <input type="hidden" name="type" value="conference_article">
-
     <p>
       <label for="conf-citation_key">Viiteavain</label><br>
       <input id="conf-citation_key" name="citation_key" required

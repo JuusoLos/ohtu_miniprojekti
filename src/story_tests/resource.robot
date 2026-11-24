@@ -22,6 +22,7 @@ Open And Configure Browser
     New Context
     New Page  about:blank
 
+
 Create Article
     [Arguments]    ${citation_key}=${EMPTY}
     IF    '${citation_key}' == '${EMPTY}'

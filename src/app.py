@@ -24,14 +24,16 @@ def new_article():
         "new_citations.html",
         values={},
         saved=request.args.get("saved") == "1",
+        type=request.args.get("type", "article")
     )
 
 
-def add_citation(fields, validate_reference, create_reference):
+def add_citation(fields, validate_reference, create_reference, type):
     values = {
         field: request.form.get(field, "").strip()
         for field in fields
     }
+    values["type"] = type
 
     try:
         reference = validate_reference(values)
@@ -42,6 +44,7 @@ def add_citation(fields, validate_reference, create_reference):
             "new_citations.html",
             values=values,
             error=str(error),
+            type="article", 
         ), 400
 
     except DuplicateCitationKeyError:
@@ -49,21 +52,22 @@ def add_citation(fields, validate_reference, create_reference):
             "new_citations.html",
             values=values,
             error="Viiteavain on jo käytössä.",
+            type="article",
         ), 409
 
-    return redirect("/citations/new?saved=1", code=303)
+    return redirect(f"/citations/new?saved=1&type={type}", code=303)
 
 @app.route("/articles", methods=["POST"])
 def add_article():
-    return add_citation(("citation_key", "author", "title", "journal", "year", "type"), validate_article, create_article)
+    return add_citation(("citation_key", "author", "title", "journal", "year", "type"), validate_article, create_article, "article")
 
 @app.route("/books", methods=["POST"])
 def add_book():
-    return add_citation(("citation_key", "author", "title", "year", "pages", "publisher", "edition", "type"),  validate_book, create_book)
+    return add_citation(("citation_key", "author", "title", "year", "pages", "publisher", "edition", "type"),  validate_book, create_book, "book")
 
 @app.route("/conference_articles", methods=["POST"])
 def add_conference_article():
-    return add_citation(("citation_key", "author", "title", "year", "conference_name", "city", "type"),  validate_conference_article, create_conference_article)
+    return add_citation(("citation_key", "author", "title", "year", "conference_name", "city", "type"),  validate_conference_article, create_conference_article, "conference_article")
 
 if __name__ == "__main__":
-    app.run(port=5001)
+    app.run()
