@@ -14,13 +14,13 @@
 {% endif %}
 
 <input class="reference-form-choice" type="radio" id="article-form" name="reference-form-choice" {% if type == "article"%} checked {% endif %}>
-<label for="article-form">Artikkeli</label>
+<label class="button" for="article-form">Artikkeli</label>
 
 <input class="reference-form-choice" type="radio" id="book-form" name="reference-form-choice" {% if type == "book"%} checked {% endif %}>
-<label for="book-form">Kirja</label>
+<label class="button" for="book-form">Kirja</label>
 
 <input class="reference-form-choice" type="radio" id="conference-article-form" name="reference-form-choice"  {% if type == "conference_article"%} checked {% endif %}>
-<label for="conference-article-form">Konferenssijulkaisu</label>
+<label class="button" for="conference-article-form">Konferenssijulkaisu</label>
 
 <div class="reference-forms">
   <form class="reference-form-panel article-form" action="/articles" method="post">

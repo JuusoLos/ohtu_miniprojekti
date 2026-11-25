@@ -1,22 +1,46 @@
+a,
+button,
+.button {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  background: #f5f5f5;
+  color: #222;
+  font: inherit;
+  line-height: normal;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover,
+button:hover,
+.button:hover {
+  background: #e8e8e8;
+  border-color: #333;
+}
+
+a:focus-visible,
+button:focus-visible,
+.button:focus-visible {
+  outline: 2px solid #333;
+  outline-offset: 2px;
+}
+
 .reference-form-choice {
   position: absolute;
   opacity: 0;
 }
 
-.reference-form-choice + label {
-  display: inline-block;
-  padding: 8px 14px;
-  border: 1px solid #999;
-  cursor: pointer;
-}
-
-.reference-form-choice:checked + label {
+.reference-form-choice:checked + .button {
   background: #e8e8e8;
   border-color: #333;
 }
 
-.reference-form-choice:focus-visible + label {
+.reference-form-choice:focus-visible + .button {
   outline: 2px solid #333;
+  outline-offset: 2px;
 }
 
 .reference-form-panel {
