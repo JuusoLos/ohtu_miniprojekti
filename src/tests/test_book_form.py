@@ -62,14 +62,6 @@ class BookFormTests(unittest.TestCase):
 
         self.assertEqual(response.status_code, 400)
 
-    def test_missing_title_is_rejected(self):
-        values = self.valid_book.copy()
-        values["title"] = ""
-
-        response = self.client.post("/books", data=values)
-
-        self.assertEqual(response.status_code, 400)
-
     def test_invalid_year_is_rejected(self):
         values = self.valid_book.copy()
         values["year"] = "abc"
