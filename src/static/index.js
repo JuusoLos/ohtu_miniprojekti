@@ -1,6 +1,7 @@
 const citationCheckboxes = document.querySelectorAll(".source-card-checkbox");
 const selectionButton = document.querySelector("#toggle-citation-selection");
 const deleteButton = document.querySelector("#delete-citations-button");
+const deleteForm = document.querySelector("#delete-citations-form");
 
 function updateSelectionButton() {
   const hasSelection = Array.from(citationCheckboxes).some(
@@ -28,4 +29,23 @@ if (selectionButton && deleteButton) {
   });
 
   updateSelectionButton();
+}
+
+if (deleteForm) {
+  deleteForm.addEventListener("submit", (event) => {
+    const selectedCount = deleteForm.querySelectorAll(
+      ".source-card-checkbox:checked"
+    ).length;
+    if (selectedCount === 0) {
+      event.preventDefault();
+      return;
+    }
+
+    const confirmed = window.confirm(
+      `Haluatko varmasti poistaa ${selectedCount} lähdettä?`
+    );
+    if (!confirmed) {
+      event.preventDefault();
+    }
+  });
 }
