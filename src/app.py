@@ -4,11 +4,18 @@ from config import app, test_env
 from repositories.citation_repository import get_citations, create_book, create_article, create_conference_article, DuplicateCitationKeyError
 from validation import validate_article, validate_book, validate_conference_article
 
+CITATION_TYPE_LABELS = {
+    "article": "Artikkeli",
+    "book": "Kirja",
+    "conference_article": "Konferenssijulkaisu",
+}
+
 @app.route("/")
 def index():
     return render_template(
         "index.html",
-        citations=get_citations()
+        citations=get_citations(),
+        citation_type_labels=CITATION_TYPE_LABELS,
     ) 
 
 if test_env:
