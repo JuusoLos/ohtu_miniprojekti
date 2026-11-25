@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, jsonify, flash
+from flask import redirect, render_template, request, jsonify
 from db_helper import reset_db
 from config import app, test_env
 from repositories.citation_repository import get_citations, create_book, create_article, create_conference_article, DuplicateCitationKeyError

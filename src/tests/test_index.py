@@ -1,12 +1,7 @@
 import pytest
 from config import app, db
 from db_helper import setup_db
-from repositories.citation_repository import (
-    create_article,
-    create_book,
-    create_conference_article,
-)
-import app as web_routes
+from repositories.citation_repository import create_article
 
 @pytest.fixture
 def client(tmp_path):
