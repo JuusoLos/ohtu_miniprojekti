@@ -37,19 +37,19 @@ def get_conference_article():
 
 def get_citations():
     sql = text("SELECT * FROM citations")
-    result = db.session.execute(sql)
-    rows = result.fetchall()
-    
-    citations = [] 
-    for row in rows:
-        match row[-1]:
-            case "article":
-                citations.append(row_to_model(Article, row))
-            case "book":
-                citations.append(Book, row)
-            case "conference":
-                citations.append(ConferenceArticle, row)    
+    rows = db.session.execute(sql).fetchall()
 
+    model_by_type = {
+        "article": Article,
+        "book": Book,
+        "conference_article": ConferenceArticle,
+    }
+
+    citations = []
+    for row in rows:
+        model = model_by_type.get(row._mapping["type"])
+        if model:
+            citations.append(row_to_model(model, row))
     return citations
 
 def create_article(article):
