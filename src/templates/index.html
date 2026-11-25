@@ -4,14 +4,20 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='source_cards.css') }}">
+<script src="{{ url_for('static', filename='index.js') }}" defer></script>
 {% endblock %}
 
 {% block body %}
 <h2>Lähteet</h2>
-<p><a href="/citations/new">Lisää lähde</a></p>
+<div class="homepage-actions">
+  <a href="/citations/new">Lisää lähde</a>
+  {% if citations %}
+  <button id="toggle-citation-selection" type="button">Valitse kaikki</button>
+  {% endif %}
+</div>
 
 {% if citations %}
-<form action="/citations/delete" method="post"></form>
+<form action="/citations/delete" method="post">
   <ul class="source-card-list" aria-label="Tallennetut lähteet">
     {% for citation in citations %}
     <li class="source-card">
