@@ -1,6 +1,7 @@
 import pytest
 from config import app, db
 from db_helper import setup_db
+from repositories.citation_repository import create_article
 
 @pytest.fixture
 def client(tmp_path):
@@ -24,3 +25,47 @@ def test_renders_heading_and_new_article_link(client):
     html = get_home(client)
     assert "Lähteet" in html
     assert 'href="/citations/new"' in html
+
+
+def test_empty_list_has_no_cards(client):
+    html = get_home(client)
+    assert "Ei lisättyjä lähteitä." in html
+    assert 'class="source-card"' not in html
+
+
+def test_two_articles_are_separate_labeled_cards(client):
+    articles = (
+        {
+            "citation_key": "TST1",
+            "author": "Testikirjoittaja",
+            "title": "Ensimmäinen otsikko",
+            "journal": "Testijulkaisu",
+            "year": 2026,
+            "type": "article"
+        },
+        {
+            "citation_key": "TST2",
+            "author": "Testikirjoittaja",
+            "title": "Toinen otsikko",
+            "journal": "Testijulkaisu",
+            "year": 2026,
+            "type": "article"
+        },
+    )
+
+    with app.app_context():
+        for article in articles:
+            create_article(article)
+
+    html = get_home(client)
+    assert html.count('class="source-card"') == 2
+    for value in ("Ensimmäinen otsikko", "Toinen otsikko", "TST1", "TST2"):
+        assert value in html
+    for label in ("Otsikko:", "Kirjoittaja:", "Julkaisu:", "Vuosi:", "Viiteavain:"):
+        assert label in html
+
+
+def test_card_stylesheet_is_served(client):
+    response = client.get("/static/source_cards.css")
+    assert response.status_code == 200
+    assert b".source-card" in response.data

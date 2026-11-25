@@ -1,24 +1,46 @@
-{% extends "layout.html" %} 
+{% extends "layout.html" %}
 
-{% block title %} Lähde viitteet {% endblock %} 
+{% block title %}Lähteet{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='source_cards.css') }}">
+{% endblock %}
+
 {% block body %}
-
 <h2>Lähteet</h2>
 
 <p><a href="/citations/new">Lisää lähde</a></p>
 
 {% if citations %}
-<ul>
+<ul class="source-card-list" aria-label="Tallennetut lähteet">
   {% for article in citations %}
-    <li style="margin-bottom: 10px;">
-      {{ article.author }}. <strong>{{ article.title }}</strong>.<br>
-      <em>{{ article.journal }}</em>, {{ article.year }}.<br>
-      {{ article.citation_key }}
-    </li>
+  <li class="source-card">
+    <div class="source-card-title">
+      <span class="source-card-label">Otsikko:</span>
+      <strong>{{ article.title }}</strong>
+    </div>
+    <dl class="source-card-details">
+      <div class="source-card-field">
+        <dt>Kirjoittaja:</dt>
+        <dd>{{ article.author }}</dd>
+      </div>
+      <div class="source-card-field">
+        <dt>Julkaisu:</dt>
+        <dd>{{ article.journal }}</dd>
+      </div>
+      <div class="source-card-field">
+        <dt>Vuosi:</dt>
+        <dd>{{ article.year }}</dd>
+      </div>
+      <div class="source-card-field">
+        <dt>Viiteavain:</dt>
+        <dd>{{ article.citation_key }}</dd>
+      </div>
+    </dl>
+  </li>
   {% endfor %}
 </ul>
 {% else %}
 <p>Ei lisättyjä lähteitä.</p>
 {% endif %}
-
 {% endblock %}
