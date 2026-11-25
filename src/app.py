@@ -1,13 +1,21 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from config import app, test_env
-from repositories.article_repository import get_articles
+from repositories.citation_repository import get_citations, create_book, create_article, create_conference_article, DuplicateCitationKeyError
+from validation import validate_article, validate_book, validate_conference_article
+
+CITATION_TYPE_LABELS = {
+    "article": "Artikkeli",
+    "book": "Kirja",
+    "conference_article": "Konferenssijulkaisu",
+}
 
 @app.route("/")
 def index():
     return render_template(
         "index.html",
-        articles=get_articles()
+        citations=get_citations(),
+        citation_type_labels=CITATION_TYPE_LABELS,
     ) 
 
 if test_env:
@@ -17,44 +25,56 @@ if test_env:
         return jsonify({ 'message': "db reset" })
 
 
-@app.route("/articles/new", methods=["GET"])
+@app.route("/citations/new", methods=["GET"])
 def new_article():
     return render_template(
-        "new_article.html",
+        "new_citations.html",
         values={},
         saved=request.args.get("saved") == "1",
+        type=request.args.get("type", "article")
     )
 
 
-@app.route("/articles", methods=["POST"])
-def add_article():
-    from repositories.article_repository import (
-        create_article,
-        DuplicateCitationKeyError,
-    )
-    from validation import validate_article
-
+def add_citation(fields, validate_reference, create_reference, type):
     values = {
         field: request.form.get(field, "").strip()
-        for field in ("citation_key", "author", "title", "journal", "year")
+        for field in fields
     }
+    values["type"] = type
 
     try:
-        article = validate_article(values)
-        create_article(article)
+        reference = validate_reference(values)
+        create_reference(reference)
 
     except ValueError as error:
         return render_template(
-            "new_article.html",
+            "new_citations.html",
             values=values,
             error=str(error),
+            type="article", 
         ), 400
 
     except DuplicateCitationKeyError:
         return render_template(
-            "new_article.html",
+            "new_citations.html",
             values=values,
             error="Viiteavain on jo käytössä.",
+            type="article",
         ), 409
 
-    return redirect("/articles/new?saved=1", code=303)
+    return redirect(f"/citations/new?saved=1&type={type}", code=303)
+
+@app.route("/articles", methods=["POST"])
+def add_article():
+    return add_citation(("citation_key", "author", "title", "journal", "year", "type"), validate_article, create_article, "article")
+
+@app.route("/books", methods=["POST"])
+def add_book():
+    return add_citation(("citation_key", "author", "title", "year", "pages", "publisher", "edition", "type"),  validate_book, create_book, "book")
+
+@app.route("/conference_articles", methods=["POST"])
+def add_conference_article():
+    return add_citation(("citation_key", "author", "title", "year", "conference_name", "city", "type"),  validate_conference_article, create_conference_article, "conference_article")
+
+if __name__ == "__main__":
+    app.run()

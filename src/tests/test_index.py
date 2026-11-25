@@ -1,7 +1,12 @@
 import pytest
 from config import app, db
 from db_helper import setup_db
-from repositories.article_repository import create_article
+from repositories.citation_repository import (
+    create_article,
+    create_book,
+    create_conference_article,
+)
+import app as web_routes
 
 @pytest.fixture
 def client(tmp_path):
@@ -24,7 +29,7 @@ def get_home(client):
 def test_renders_heading_and_new_article_link(client):
     html = get_home(client)
     assert "Lähteet" in html
-    assert 'href="/articles/new"' in html
+    assert 'href="/citations/new"' in html
 
 def test_empty_list_has_no_cards(client):
     html = get_home(client)
@@ -40,6 +45,7 @@ def test_two_articles_are_separate_labeled_cards(client):
             "title": "Ensimmäinen otsikko",
             "journal": "Testijulkaisu",
             "year": 2026,
+            "type": "article",
         },
         {
             "citation_key": "TST2",
@@ -47,6 +53,7 @@ def test_two_articles_are_separate_labeled_cards(client):
             "title": "Toinen otsikko",
             "journal": "Testijulkaisu",
             "year": 2026,
+            "type": "article",
         },
     )
 
