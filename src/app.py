@@ -84,7 +84,7 @@ def add_book():
 def add_conference_article():
     return add_citation(("citation_key", "author", "title", "year", "conference_name", "city", "type"),  validate_conference_article, create_conference_article, "conference_article")
 
-@app.route("/citations/<id: int>")
+@app.route("/citations/<int:id>")
 def citation(id: int):
     citation = get_citation_by_id(id)
     if citation:
