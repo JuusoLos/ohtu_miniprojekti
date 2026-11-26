@@ -52,6 +52,19 @@ def get_citations():
             citations.append(row_to_model(model, row))
     return citations
 
+def get_citation_by_id(id: int) :
+    sql = text("SELECT * FROM citations WHERE id = :id")
+    row = db.session.execute(sql, {"id": id}).fetchone()
+
+    model_by_type = {
+        "article": Article,
+        "book": Book,
+        "conference_article": ConferenceArticle,
+    }
+    model = model_by_type.get(row._mapping["type"])
+    if model:
+        return row_to_model(model, row)
+
 def create_article(article):
     sql = text(
         "INSERT INTO citations "
