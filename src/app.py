@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, jsonify, flash
+from flask import redirect, render_template, request, jsonify
 from db_helper import reset_db
 from config import app, test_env
 from repositories.citation_repository import get_citations, create_book, create_article, create_conference_article, DuplicateCitationKeyError
@@ -63,6 +63,14 @@ def add_citation(fields, validate_reference, create_reference, type):
         ), 409
 
     return redirect(f"/citations/new?saved=1&type={type}", code=303)
+
+@app.route("/citations/delete", methods=["POST"])
+def delete_citations():
+    from repositories.citation_repository import delete_citations
+
+    citation_ids = request.form.getlist("citation_ids")
+    delete_citations([int(citation_id) for citation_id in citation_ids])
+    return redirect("/")
 
 @app.route("/articles", methods=["POST"])
 def add_article():

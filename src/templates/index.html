@@ -4,45 +4,61 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='source_cards.css') }}">
+<script src="{{ url_for('static', filename='index.js') }}" defer></script>
 {% endblock %}
 
 {% block body %}
 <h2>Lähteet</h2>
-<p><a href="/citations/new">Lisää lähde</a></p>
+<div class="homepage-actions">
+  <a href="/citations/new">Lisää lähde</a>
+  {% if citations %}
+  <button id="toggle-citation-selection" type="button">Valitse kaikki</button>
+  <button id="delete-citations-button" class="delete-button" type="submit" form="delete-citations-form">Poista</button>
+  {% endif %}
+</div>
 
 {% if citations %}
-<ul class="source-card-list" aria-label="Tallennetut lähteet">
-  {% for citation in citations %}
-  <li class="source-card">
-    <div class="source-card-title">
-      <span class="source-card-label">Otsikko:</span>
-      <strong>{{ citation.title }}</strong>
-    </div>
-    <dl class="source-card-details">
-      <div class="source-card-field">
-        <dt>Kirjoittaja:</dt>
-        <dd>{{ citation.author }}</dd>
+<form id="delete-citations-form" action="/citations/delete" method="post">
+  <ul class="source-card-list" aria-label="Tallennetut lähteet">
+    {% for citation in citations %}
+    <li class="source-card">
+      <input
+        type="checkbox"
+          name="citation_ids"
+          value="{{ citation.id }}"
+          id="citation-{{ citation.id }}"
+          class="source-card-checkbox"
+      >
+      <div class="source-card-title">
+        <span class="source-card-label">Otsikko:</span>
+        <strong>{{ citation.title }}</strong>
       </div>
-      <div class="source-card-field">
-        <dt>Julkaisu:</dt>
-        <dd>{{ citation.journal }}</dd>
-      </div>
-      <div class="source-card-field">
-        <dt>Vuosi:</dt>
-        <dd>{{ citation.year }}</dd>
-      </div>
-      <div class="source-card-field">
-        <dt>Viiteavain:</dt>
-        <dd>{{ citation.citation_key }}</dd>
-      </div>
-      <div class="source-card-field">
-        <dt>Tyyppi:</dt>
-        <dd>{{ citation_type_labels.get(citation.type) }}</dd>
-      </div>
-    </dl>
-  </li>
-  {% endfor %}
-</ul>
+      <dl class="source-card-details">
+        <div class="source-card-field">
+          <dt>Kirjoittaja:</dt>
+          <dd>{{ citation.author }}</dd>
+        </div>
+        <div class="source-card-field">
+          <dt>Julkaisu:</dt>
+          <dd>{{ citation.journal }}</dd>
+        </div>
+        <div class="source-card-field">
+          <dt>Vuosi:</dt>
+          <dd>{{ citation.year }}</dd>
+        </div>
+        <div class="source-card-field">
+          <dt>Viiteavain:</dt>
+          <dd>{{ citation.citation_key }}</dd>
+        </div>
+        <div class="source-card-field">
+          <dt>Tyyppi:</dt>
+          <dd>{{ citation_type_labels.get(citation.type) }}</dd>
+        </div>
+      </dl>
+    </li>
+    {% endfor %}
+  </ul>
+</form>
 {% else %}
 <p>Ei lisättyjä lähteitä.</p>
 {% endif %}

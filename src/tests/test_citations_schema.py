@@ -1,6 +1,3 @@
-from typing import Any
-
-
 import sqlite3
 import unittest
 from pathlib import Path

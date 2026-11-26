@@ -6,4 +6,5 @@ disable=all
 enable=
     E,
     unused-variable,
-    unused-argument
+    unused-argument,
+    unused-import,
