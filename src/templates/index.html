@@ -34,10 +34,12 @@
         <strong>{{ citation.title }}</strong>
       </div>
       <dl class="source-card-details">
-        <div class="source-card-field">
-          <dt>Kirjoittaja:</dt>
-          <dd>{{ citation.author }}</dd>
-        </div>
+        <a href="/citation/{{ citation.id }}">
+          <div class="source-card-field">
+            <dt>Kirjoittaja:</dt>
+            <dd>{{ citation.author }}</dd>
+          </div>
+        </a>
         <div class="source-card-field">
           <dt>Julkaisu:</dt>
           <dd>{{ citation.journal }}</dd>
