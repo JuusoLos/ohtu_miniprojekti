@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}{citation.title}{% endblock %}
+{% block title %}{{ citation.title }}{% endblock %}
 
 {% block head %}
 {% endblock %}
@@ -26,10 +26,10 @@
     <p>Painos: {{ citation.edition }}</p>
   {% endif %}  
 {% elif citation.type == 'article' %}
-  <p>Viiteavain: {{ citation_key }}</p>
-  <p>Tekijä: {{ author }}</p>
-  <p>Julkaisu: {{ journal }}</p>
-  <p>Vuosi: {{ year }}</p>
+  <p>Viiteavain: {{ citation.citation_key }}</p>
+  <p>Tekijä: {{ citation.author }}</p>
+  <p>Julkaisu: {{ citation.journal }}</p>
+  <p>Vuosi: {{ citation.year }}</p>
 {% endif %}
 
 {% endblock %}

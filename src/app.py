@@ -88,7 +88,7 @@ def add_conference_article():
 def citation(id: int):
     citation = get_citation_by_id(id)
     if citation:
-        return render_template("citation_page.html", citation)
+        return render_template("citation_page.html", citation=citation)
 
     return redirect("/")    
 
