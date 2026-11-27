@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 
 @dataclass
 class Article:
@@ -9,3 +9,6 @@ class Article:
     journal: str
     year: int
     type: str
+
+    def to_dict(self) -> dict:
+        return asdict(self)

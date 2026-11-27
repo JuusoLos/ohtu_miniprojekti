@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 
 @dataclass
 class ConferenceArticle:
@@ -10,3 +10,6 @@ class ConferenceArticle:
     conference_name: str
     city: str
     type: str
+
+    def to_dict(self) -> dict:
+        return asdict(self)
