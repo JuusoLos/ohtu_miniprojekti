@@ -73,7 +73,6 @@ Create Conference Article
     Fill Text     css=input[id="conf-citation_key"]    ${citation_key}
     Fill Text     css=input[id="conf-author"]    Testikirjoittaja
     Fill Text     css=input[id="conf-title"]    Testijulkaisu
-    Fill Text     css=input[id="conf-pages"]    1-23
     Fill Text     css=input[id="conf-conference_name"]    Testikonferenssi
     Fill Text     css=input[id="conf-city"]   Testikaupunki
     Fill Text     css=input[id="conf-year"]    2026
