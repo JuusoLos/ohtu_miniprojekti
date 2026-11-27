@@ -35,7 +35,7 @@ def new_article():
     )
 
 
-def add_citation(fields, validate_reference, create_reference, type):
+def add_citation(fields, validate_citation, create_citation, type):
     values = {
         field: request.form.get(field, "").strip()
         for field in fields
@@ -43,8 +43,8 @@ def add_citation(fields, validate_reference, create_reference, type):
     values["type"] = type
 
     try:
-        reference = validate_reference(values)
-        create_reference(reference)
+        citation = validate_citation(values)
+        create_citation(citation)
 
     except ValueError as error:
         return render_template(
