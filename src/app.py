@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, jsonify
 from db_helper import reset_db
 from config import app, test_env
-from repositories.citation_repository import get_citations, create_book, create_article, create_conference_article, DuplicateCitationKeyError
+from repositories.citation_repository import get_citation_by_id, get_citations, create_book, create_article, create_conference_article, DuplicateCitationKeyError
 from validation import validate_article, validate_book, validate_conference_article
 
 CITATION_TYPE_LABELS = {
@@ -83,6 +83,14 @@ def add_book():
 @app.route("/conference_articles", methods=["POST"])
 def add_conference_article():
     return add_citation(("citation_key", "author", "title", "year", "conference_name", "city", "type"),  validate_conference_article, create_conference_article, "conference_article")
+
+@app.route("/citations/<int:id>")
+def citation(id: int):
+    citation = get_citation_by_id(id)
+    if citation:
+        return render_template("citation_page.html", citation=citation)
+
+    return redirect("/")    
 
 if __name__ == "__main__":
     app.run()
