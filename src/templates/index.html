@@ -30,31 +30,9 @@
           class="source-card-checkbox"
       >
       <div class="source-card-title">
-        <span class="source-card-label">Otsikko:</span>
-        <a class="source-card-link" href="/citations/{{ citation.id }}"><strong>{{ citation.title }}</strong></a>
+        <a class="source-card-link" href="/citations/{{ citation.id }}">{{ citation.title }}</a>
       </div>
-      <dl class="source-card-details">
-        <div class="source-card-field">
-          <dt>Kirjoittaja:</dt>
-          <dd>{{ citation.author }}</dd>
-        </div>
-        <div class="source-card-field">
-          <dt>Julkaisu:</dt>
-          <dd>{{ citation.journal }}</dd>
-        </div>
-        <div class="source-card-field">
-          <dt>Vuosi:</dt>
-          <dd>{{ citation.year }}</dd>
-        </div>
-        <div class="source-card-field">
-          <dt>Viiteavain:</dt>
-          <dd>{{ citation.citation_key }}</dd>
-        </div>
-        <div class="source-card-field">
-          <dt>Tyyppi:</dt>
-          <dd>{{ citation_type_labels.get(citation.type) }}</dd>
-        </div>
-      </dl>
+      <p class="source-card-meta">{{ citation.author }} · {{ citation.year }}</p>
     </li>
     {% endfor %}
   </ul>

@@ -14,6 +14,8 @@ Artikkelien listauksen näyttäminen
 
     Go To    ${HOME_URL}
 
-    ${page_text}=    Get Text    body
-    Should Contain    ${page_text}    ${citation_key}
+    ${page_text}=    Get Text    css=.source-card-list
     Should Contain    ${page_text}    Testiartikkeli
+    Should Contain    ${page_text}    Testikirjoittaja
+    Should Contain    ${page_text}    2026
+    Should Not Contain    ${page_text}    ${citation_key}

@@ -37,19 +37,14 @@
   flex-wrap: wrap;
   gap: 5px;
   align-items: baseline;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   line-height: 1.35;
-}
-
-.source-card-label,
-.source-card-field dt {
-  color: var(--heading);
-  font-weight: 600;
 }
 
 .source-card-link {
   color: var(--heading);
-  font-size: 1.08rem;
+  font-size: 1.12rem;
+  font-weight: 700;
 }
 
 /* Otsikon linkki kattaa koko kortin, mutta valintaruutu pysyy klikattavana. */
@@ -65,25 +60,12 @@
   border-radius: var(--radius);
 }
 
-.source-card-details {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 18px;
-  row-gap: 4px;
+.source-card-meta {
   margin: 0;
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   line-height: 1.45;
 }
-
-.source-card-field {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  min-width: 0;
-}
-
-.source-card-field dd { margin: 0; }
 
 .source-card-checkbox {
   position: absolute;

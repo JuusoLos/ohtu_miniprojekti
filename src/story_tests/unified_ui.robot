@@ -12,6 +12,23 @@ Sovelluksessa on varillinen tausta ja keskitetty sisalto
     ${centered}=    Evaluate JavaScript    css=main.page-shell    (element) => Math.abs(element.getBoundingClientRect().left - (window.innerWidth - element.getBoundingClientRect().right)) < 2
     Should Be True    ${centered}
 
+Etusivulla lomakkeella ja tietosivulla on samat sivumarginaalit
+    Create Article
+    Go To    ${HOME_URL}
+    ${front_left}=    Evaluate JavaScript    css=main.page-shell    (element) => Math.round(element.getBoundingClientRect().left)
+    ${front_width}=    Evaluate JavaScript    css=main.page-shell    (element) => Math.round(element.getBoundingClientRect().width)
+    Go To    ${HOME_URL}/citations/new
+    ${form_left}=    Evaluate JavaScript    css=main.page-shell    (element) => Math.round(element.getBoundingClientRect().left)
+    ${form_width}=    Evaluate JavaScript    css=main.page-shell    (element) => Math.round(element.getBoundingClientRect().width)
+    Should Be Equal As Integers    ${front_left}    ${form_left}
+    Should Be Equal As Integers    ${front_width}    ${form_width}
+    Go To    ${HOME_URL}
+    Click    css=.source-card-link
+    ${detail_left}=    Evaluate JavaScript    css=main.page-shell    (element) => Math.round(element.getBoundingClientRect().left)
+    ${detail_width}=    Evaluate JavaScript    css=main.page-shell    (element) => Math.round(element.getBoundingClientRect().width)
+    Should Be Equal As Integers    ${front_left}    ${detail_left}
+    Should Be Equal As Integers    ${front_width}    ${detail_width}
+
 Otsikoissa ja teksteissa on yhtenainen fontti
     Go To    ${HOME_URL}
     ${body_font}=    Evaluate JavaScript    css=body    (element) => getComputedStyle(element).fontFamily
