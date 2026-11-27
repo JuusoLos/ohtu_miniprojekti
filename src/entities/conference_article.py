@@ -7,7 +7,6 @@ class ConferenceArticle:
     author: str
     title: str
     year: int
-    pages: str
     conference_name: str
     city: str
     type: str

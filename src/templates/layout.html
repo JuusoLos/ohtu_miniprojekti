@@ -3,27 +3,27 @@
     <p>
       <label for="article-citation_key">Viiteavain</label><br>
       <input id="article-citation_key" name="citation_key" required
-             value="{{ values.get('citation_key', '') }}">
+          {% if article %} value="{{ article.get('citation_key', '') }}" {% endif %}>
     </p>
     <p>
       <label for="article-author">Kirjoittaja</label><br>
       <input id="article-author" name="author" required
-             value="{{ values.get('author', '') }}">
+          {% if article %} value="{{ article.get('author', '') }}" {% endif %}>
     </p>
     <p>
       <label for="article-title">Otsikko</label><br>
       <input id="article-title" name="title" required
-             value="{{ values.get('title', '') }}">
+          {% if article %} value="{{  article.get('title', '') }}" {% endif %}>
     </p>
     <p>
       <label for="article-journal">Julkaisun nimi</label><br>
       <input id="article-journal" name="journal" required
-             value="{{ values.get('journal', '') }}">
+          {% if article %} value="{{ article.get('journal', '') }}" {% endif %}>
     </p>
     <p>
       <label for="article-year">Vuosi</label><br>
       <input id="article-year" name="year" inputmode="numeric" required
-             value="{{ values.get('year', '') }}">
+          {% if article %} value="{{ article.get('year', '') }}" {% endif %}>
     </p>
 
     <button id="article-submit" type="submit">Tallenna artikkeli</button>
@@ -35,37 +35,37 @@
     <p>
       <label for="book-citation_key">Viiteavain</label><br>
       <input id="book-citation_key" name="citation_key" required
-             value="{{ values.get('citation_key', '') }}">
+          {% if book %} value="{{ book.get('citation_key', '') }}" {% endif %}>
     </p>
     <p>
       <label for="book-author">Kirjoittaja</label><br>
       <input id="book-author" name="author" required
-             value="{{ values.get('author', '') }}">
+          {% if book %} value="{{ book.get('author', '') }}" {% endif %}>
     </p>
     <p>
       <label for="book-title">Nimi</label><br>
       <input id="book-title" name="title" required
-             value="{{ values.get('title', '') }}">
+          {% if book %} value="{{ book.get('title', '') }}" {% endif %}>
     </p>
     <p>
       <label for="book-publisher">Kustantaja</label><br>
       <input id="book-publisher" name="publisher" required
-             value="{{ values.get('publisher', '') }}">
+          {% if book %} value="{{ book.get('publisher', '') }}" {% endif %}>
     </p>
     <p>
       <label for="book-year">Vuosi</label><br>
       <input id="book-year" name="year" inputmode="numeric" required
-             value="{{ values.get('year', '') }}">
+          {% if book %} value="{{ book.get('year', '') }}" {% endif %}>
     </p>
     <p>
       <label for="book-pages">Sivunumerot</label><br>
       <input id="book-pages" name="pages" inputmode="text"
-             value="{{ values.get('pages', '') }}">
+          {% if book %} value="{{ book.get('pages', '') }}" {% endif %}>
     </p>
     <p>
       <label for="book-edition">Painos</label><br>
       <input id="book-edition" name="edition" inputmode="text"
-             value="{{ values.get('edition', '') }}">
+          {% if book %} value="{{ book.get('edition', '') }}" {% endif %}>
     </p>
 
     <button id="book-submit" type="submit">Tallenna kirja</button>
@@ -77,37 +77,32 @@
     <p>
       <label for="conf-citation_key">Viiteavain</label><br>
       <input id="conf-citation_key" name="citation_key" required
-             value="{{ values.get('citation_key', '') }}">
+          {% if conference_article %} value="{{ conference_article.get('citation_key', '') }}" {% endif %}>
     </p>
     <p>
       <label for="conf-author">Kirjoittaja</label><br>
       <input id="conf-author" name="author" required
-             value="{{ values.get('author', '') }}">
+          {% if conference_article %} value="{{ conference_article.get('citation_key', '') }}" {% endif %}>
     </p>
     <p>
       <label for="conf-title">Otsikko</label><br>
       <input id="conf-title" name="title" required
-             value="{{ values.get('title', '') }}">
-    </p>
-    <p>
-      <label for="conf-pages">Sivunumerot</label><br>
-      <input id="conf-pages" name="pages" inputmode="text"
-             value="{{ values.get('pages', '') }}">
+          {% if conference_article %} value="{{ conference_article.get('title', '') }}" {% endif %}>
     </p>
     <p>
       <label for="conf-conference_name">Konferenssin nimi</label><br>
       <input id="conf-conference_name" name="conference_name" required
-             value="{{ values.get('conference_name', '') }}">
+          {% if conference_article %} value="{{ conference_article.get('conference_name', '') }}" {% endif %}>
     </p>
     <p>
       <label for="conf-city">Sijaintikaupunki</label><br>
       <input id="conf-city" name="city" required
-             value="{{ values.get('city', '') }}">
+          {% if conference_article %} value="{{ conference_article.get('city', '') }}" {% endif %}>
     </p>
     <p>
       <label for="conf-year">Vuosi</label><br>
       <input id="conf-year" name="year" inputmode="numeric" required
-             value="{{ values.get('year', '') }}">
+          {% if conference_article %} value="{{ conference_article.get('year', '') }}" {% endif %}>
     </p>
 
     <button id="conf-submit" type="submit">Tallenna konferenssijulkaisu</button>
