@@ -13,125 +13,19 @@
   <p role="alert">{{ error }}</p>
 {% endif %}
 
-<input class="reference-form-choice" type="radio" id="article-form" name="reference-form-choice" {% if type == "article"%} checked {% endif %}>
+<input class="citation-form-choice" type="radio" id="article-form" name="citation-form-choice" {% if type == "article"%} checked {% endif %}>
 <label class="button" for="article-form">Artikkeli</label>
 
-<input class="reference-form-choice" type="radio" id="book-form" name="reference-form-choice" {% if type == "book"%} checked {% endif %}>
+<input class="citation-form-choice" type="radio" id="book-form" name="citation-form-choice" {% if type == "book"%} checked {% endif %}>
 <label class="button" for="book-form">Kirja</label>
 
-<input class="reference-form-choice" type="radio" id="conference-article-form" name="reference-form-choice"  {% if type == "conference_article"%} checked {% endif %}>
+<input class="citation-form-choice" type="radio" id="conference-article-form" name="citation-form-choice"  {% if type == "conference_article"%} checked {% endif %}>
 <label class="button" for="conference-article-form">Konferenssijulkaisu</label>
 
-<div class="reference-forms">
-  <form class="reference-form-panel article-form" action="/articles" method="post">
-    <p>
-      <label for="article-citation_key">Viiteavain</label><br>
-      <input id="article-citation_key" name="citation_key" required
-             value="{{ values.get('citation_key', '') }}">
-    </p>
-    <p>
-      <label for="article-author">Kirjoittaja</label><br>
-      <input id="article-author" name="author" required
-             value="{{ values.get('author', '') }}">
-    </p>
-    <p>
-      <label for="article-title">Otsikko</label><br>
-      <input id="article-title" name="title" required
-             value="{{ values.get('title', '') }}">
-    </p>
-    <p>
-      <label for="article-journal">Julkaisun nimi</label><br>
-      <input id="article-journal" name="journal" required
-             value="{{ values.get('journal', '') }}">
-    </p>
-    <p>
-      <label for="article-year">Vuosi</label><br>
-      <input id="article-year" name="year" inputmode="numeric" required
-             value="{{ values.get('year', '') }}">
-    </p>
-
-    <button id="article-submit" type="submit">Tallenna artikkeli</button>
-  </form>
-
-  <form class="reference-form-panel book-form" action="/books" method="post">
-    <p>
-      <label for="book-citation_key">Viiteavain</label><br>
-      <input id="book-citation_key" name="citation_key" required
-             value="{{ values.get('citation_key', '') }}">
-    </p>
-    <p>
-      <label for="book-author">Kirjoittaja</label><br>
-      <input id="book-author" name="author" required
-             value="{{ values.get('author', '') }}">
-    </p>
-    <p>
-      <label for="book-title">Nimi</label><br>
-      <input id="book-title" name="title" required
-             value="{{ values.get('title', '') }}">
-    </p>
-    <p>
-      <label for="book-publisher">Kustantaja</label><br>
-      <input id="book-publisher" name="publisher" required
-             value="{{ values.get('publisher', '') }}">
-    </p>
-    <p>
-      <label for="book-year">Vuosi</label><br>
-      <input id="book-year" name="year" inputmode="numeric" required
-             value="{{ values.get('year', '') }}">
-    </p>
-    <p>
-      <label for="book-pages">Sivunumerot</label><br>
-      <input id="book-pages" name="pages" inputmode="text"
-             value="{{ values.get('pages', '') }}">
-    </p>
-    <p>
-      <label for="book-edition">Painos</label><br>
-      <input id="book-edition" name="edition" inputmode="text"
-             value="{{ values.get('edition', '') }}">
-    </p>
-
-    <button id="book-submit" type="submit">Tallenna kirja</button>
-  </form>
-
-  <form class="reference-form-panel conference-article-form" action="/conference_articles" method="post">
-    <p>
-      <label for="conf-citation_key">Viiteavain</label><br>
-      <input id="conf-citation_key" name="citation_key" required
-             value="{{ values.get('citation_key', '') }}">
-    </p>
-    <p>
-      <label for="conf-author">Kirjoittaja</label><br>
-      <input id="conf-author" name="author" required
-             value="{{ values.get('author', '') }}">
-    </p>
-    <p>
-      <label for="conf-title">Otsikko</label><br>
-      <input id="conf-title" name="title" required
-             value="{{ values.get('title', '') }}">
-    </p>
-    <p>
-      <label for="conf-pages">Sivunumerot</label><br>
-      <input id="conf-pages" name="pages" inputmode="text"
-             value="{{ values.get('pages', '') }}">
-    </p>
-    <p>
-      <label for="conf-conference_name">Konferenssin nimi</label><br>
-      <input id="conf-conference_name" name="conference_name" required
-             value="{{ values.get('conference_name', '') }}">
-    </p>
-    <p>
-      <label for="conf-city">Sijaintikaupunki</label><br>
-      <input id="conf-city" name="city" required
-             value="{{ values.get('city', '') }}">
-    </p>
-    <p>
-      <label for="conf-year">Vuosi</label><br>
-      <input id="conf-year" name="year" inputmode="numeric" required
-             value="{{ values.get('year', '') }}">
-    </p>
-
-    <button id="conf-submit" type="submit">Tallenna konferenssijulkaisu</button>
-  </form>
+<div class="citation-forms">
+  {{ article_form(None, "/articles") }}
+  {{ book_form(None, "/books") }}
+  {{ conference_article_form(None, "/conference-articles") }}
 </div>
 
 <p><a href="/">Takaisin etusivulle</a></p>
