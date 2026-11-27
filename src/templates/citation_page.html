@@ -2,34 +2,32 @@
 
 {% block title %}{{ citation.title }}{% endblock %}
 
-{% block head %}
-{% endblock %}
-
-
-<h1>{{ citation.title }}</h1>
 {% block body %}
-{% if citation.type == 'conference_article' %}
-  <p>Viiteavain: {{ citation.citation_key }}</p>
-  <p>Julkaisu: {{ citation.author }}</p>
-  <p>Konferenssi nimi: {{ citation.conference_name }}</p>
-  <p>Kaupunki: {{ citation.city }}</p>
-  <p>Vuosi: {{ citation.year }}</p>
-{% elif citation.type == 'book' %}
-  <p>Viiteavain: {{ citation.citation_key }}</p>
-  <p>Tekijä: {{ citation.author }}</p>
-  <p>Vuosi:  {{ citation.year }}</p>
-  <p>Kustantaja: {{ citation.publisher }}</p>
-  {% if citation.pages  %}
-    <p>Sivut: {{ citation.pages }}</p>
-  {% endif %}  
-  {% if citation.pages  %}
-    <p>Painos: {{ citation.edition }}</p>
-  {% endif %}  
-{% elif citation.type == 'article' %}
-  <p>Viiteavain: {{ citation.citation_key }}</p>
-  <p>Tekijä: {{ citation.author }}</p>
-  <p>Julkaisu: {{ citation.journal }}</p>
-  <p>Vuosi: {{ citation.year }}</p>
-{% endif %}
-
+<h1>{{ citation.title }}</h1>
+<div class="citation-details">
+  {% if citation.type == 'conference_article' %}
+    <p><strong>Viiteavain:</strong> {{ citation.citation_key }}</p>
+    <p><strong>Tekijä:</strong> {{ citation.author }}</p>
+    <p><strong>Konferenssin nimi:</strong> {{ citation.conference_name }}</p>
+    <p><strong>Kaupunki:</strong> {{ citation.city }}</p>
+    <p><strong>Vuosi:</strong> {{ citation.year }}</p>
+  {% elif citation.type == 'book' %}
+    <p><strong>Viiteavain:</strong> {{ citation.citation_key }}</p>
+    <p><strong>Tekijä:</strong> {{ citation.author }}</p>
+    <p><strong>Vuosi:</strong> {{ citation.year }}</p>
+    <p><strong>Kustantaja:</strong> {{ citation.publisher }}</p>
+    {% if citation.pages %}
+      <p><strong>Sivut:</strong> {{ citation.pages }}</p>
+    {% endif %}
+    {% if citation.edition %}
+      <p><strong>Painos:</strong> {{ citation.edition }}</p>
+    {% endif %}
+  {% elif citation.type == 'article' %}
+    <p><strong>Viiteavain:</strong> {{ citation.citation_key }}</p>
+    <p><strong>Tekijä:</strong> {{ citation.author }}</p>
+    <p><strong>Julkaisu:</strong> {{ citation.journal }}</p>
+    <p><strong>Vuosi:</strong> {{ citation.year }}</p>
+  {% endif %}
+</div>
+<a class="back-link" href="/">Takaisin lähteisiin</a>
 {% endblock %}

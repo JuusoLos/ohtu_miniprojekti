@@ -55,6 +55,8 @@ def get_citations():
 def get_citation_by_id(id: int) :
     sql = text("SELECT * FROM citations WHERE id = :id")
     row = db.session.execute(sql, {"id": id}).fetchone()
+    if row is None:
+        return None
 
     model_by_type = {
         "article": Article,
