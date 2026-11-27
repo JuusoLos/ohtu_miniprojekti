@@ -1,21 +1,21 @@
 import re
 
 
-def validate_required(reference, required_fields):
-    if any(not reference.get(field) for field in required_fields):
+def validate_required(citation, required_fields):
+    if any(not citation.get(field) for field in required_fields):
         raise ValueError("Täytä kaikki pakolliset kentät.")
 
 
-def validate_citation(reference):
-    if not re.fullmatch("[A-Za-z0-9:_-]+", reference["citation_key"]):
+def validate_citation(citation):
+    if not re.fullmatch("[A-Za-z0-9:_-]+", citation["citation_key"]):
         raise ValueError("Viiteavain sisältää virheellisiä merkkejä.")
 
-    if not re.fullmatch("[0-9]{4}", reference["year"]):
+    if not re.fullmatch("[0-9]{4}", citation["year"]):
         raise ValueError("Vuoden pitää olla nelinumeroinen.")
 
-    reference["year"] = int(reference["year"])
+    citation["year"] = int(citation["year"])
 
-    return reference
+    return citation
 
 
 def validate_pages(citation):

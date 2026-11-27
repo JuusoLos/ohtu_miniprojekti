@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 
 @dataclass
 class Book:
@@ -11,3 +11,6 @@ class Book:
     publisher: str
     edition: int 
     type: str
+
+    def to_dict(self) -> dict:
+        return asdict(self)

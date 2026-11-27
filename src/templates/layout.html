@@ -1,3 +1,114 @@
+{% macro article_form(article, endpoint) -%}
+  <form class="citation-form-panel article-form" action={{ endpoint }} method="post">
+    <p>
+      <label for="article-citation_key">Viiteavain</label><br>
+      <input id="article-citation_key" name="citation_key" required
+          {% if article %} value="{{ article.get('citation_key', '') }}" {% endif %}>
+    </p>
+    <p>
+      <label for="article-author">Kirjoittaja</label><br>
+      <input id="article-author" name="author" required
+          {% if article %} value="{{ article.get('author', '') }}" {% endif %}>
+    </p>
+    <p>
+      <label for="article-title">Otsikko</label><br>
+      <input id="article-title" name="title" required
+          {% if article %} value="{{  article.get('title', '') }}" {% endif %}>
+    </p>
+    <p>
+      <label for="article-journal">Julkaisun nimi</label><br>
+      <input id="article-journal" name="journal" required
+          {% if article %} value="{{ article.get('journal', '') }}" {% endif %}>
+    </p>
+    <p>
+      <label for="article-year">Vuosi</label><br>
+      <input id="article-year" name="year" inputmode="numeric" required
+          {% if article %} value="{{ article.get('year', '') }}" {% endif %}>
+    </p>
+
+    <button id="article-submit" type="submit">Tallenna artikkeli</button>
+  </form>
+{%- endmacro %}
+
+{% macro book_form(book, endpoint) -%}
+  <form class="citation-form-panel book-form" action={{ endpoint }} method="post">
+    <p>
+      <label for="book-citation_key">Viiteavain</label><br>
+      <input id="book-citation_key" name="citation_key" required
+          {% if book %} value="{{ book.get('citation_key', '') }}" {% endif %}>
+    </p>
+    <p>
+      <label for="book-author">Kirjoittaja</label><br>
+      <input id="book-author" name="author" required
+          {% if book %} value="{{ book.get('author', '') }}" {% endif %}>
+    </p>
+    <p>
+      <label for="book-title">Nimi</label><br>
+      <input id="book-title" name="title" required
+          {% if book %} value="{{ book.get('title', '') }}" {% endif %}>
+    </p>
+    <p>
+      <label for="book-publisher">Kustantaja</label><br>
+      <input id="book-publisher" name="publisher" required
+          {% if book %} value="{{ book.get('publisher', '') }}" {% endif %}>
+    </p>
+    <p>
+      <label for="book-year">Vuosi</label><br>
+      <input id="book-year" name="year" inputmode="numeric" required
+          {% if book %} value="{{ book.get('year', '') }}" {% endif %}>
+    </p>
+    <p>
+      <label for="book-pages">Sivunumerot</label><br>
+      <input id="book-pages" name="pages" inputmode="text"
+          {% if book %} value="{{ book.get('pages', '') }}" {% endif %}>
+    </p>
+    <p>
+      <label for="book-edition">Painos</label><br>
+      <input id="book-edition" name="edition" inputmode="text"
+          {% if book %} value="{{ book.get('edition', '') }}" {% endif %}>
+    </p>
+
+    <button id="book-submit" type="submit">Tallenna kirja</button>
+  </form>
+{%- endmacro %}
+
+{% macro conference_article_form(conference_article, endpoint) -%}
+  <form class="citation-form-panel conference-article-form" action={{ endpoint }} method="post">
+    <p>
+      <label for="conf-citation_key">Viiteavain</label><br>
+      <input id="conf-citation_key" name="citation_key" required
+          {% if conference_article %} value="{{ conference_article.get('citation_key', '') }}" {% endif %}>
+    </p>
+    <p>
+      <label for="conf-author">Kirjoittaja</label><br>
+      <input id="conf-author" name="author" required
+          {% if conference_article %} value="{{ conference_article.get('citation_key', '') }}" {% endif %}>
+    </p>
+    <p>
+      <label for="conf-title">Otsikko</label><br>
+      <input id="conf-title" name="title" required
+          {% if conference_article %} value="{{ conference_article.get('title', '') }}" {% endif %}>
+    </p>
+    <p>
+      <label for="conf-conference_name">Konferenssin nimi</label><br>
+      <input id="conf-conference_name" name="conference_name" required
+          {% if conference_article %} value="{{ conference_article.get('conference_name', '') }}" {% endif %}>
+    </p>
+    <p>
+      <label for="conf-city">Sijaintikaupunki</label><br>
+      <input id="conf-city" name="city" required
+          {% if conference_article %} value="{{ conference_article.get('city', '') }}" {% endif %}>
+    </p>
+    <p>
+      <label for="conf-year">Vuosi</label><br>
+      <input id="conf-year" name="year" inputmode="numeric" required
+          {% if conference_article %} value="{{ conference_article.get('year', '') }}" {% endif %}>
+    </p>
+
+    <button id="conf-submit" type="submit">Tallenna konferenssijulkaisu</button>
+  </form>
+{% endmacro -%}
+
 <!DOCTYPE html>
 <html lang="fi">
   <head>

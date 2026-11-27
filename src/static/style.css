@@ -49,28 +49,28 @@ button:focus-visible,
   background: #dc2626;
 }
 
-.reference-form-choice {
+.citation-form-choice {
   position: absolute;
   opacity: 0;
 }
 
-.reference-form-choice:checked + .button {
+.citation-form-choice:checked + .button {
   background: #e8e8e8;
   border-color: #333;
 }
 
-.reference-form-choice:focus-visible + .button {
+.citation-form-choice:focus-visible + .button {
   outline: 2px solid #333;
   outline-offset: 2px;
 }
 
-.reference-form-panel {
+.citation-form-panel {
   display: none;
   margin-top: 1rem;
 }
 
-#article-form:checked ~ .reference-forms .article-form,
-#book-form:checked ~ .reference-forms .book-form,
-#conference-article-form:checked ~ .reference-forms .conference-article-form {
+#article-form:checked ~ .citation-forms .article-form,
+#book-form:checked ~ .citation-forms .book-form,
+#conference-article-form:checked ~ .citation-forms .conference-article-form {
   display: block;
 }
