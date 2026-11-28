@@ -5,18 +5,23 @@ Suite Setup    Open And Configure Browser
 Suite Teardown    Close Browser
 
 *** Test Cases ***
-Tallennetut lähteet näkyvät erillisinä nimettyinä kortteina
+Tallennetut lahteet nakyvat pelkistettyina kortteina
     ${key1}=    Create Article
     ${key2}=    Create Article
 
     Go To    ${HOME_URL}
     ${count}=    Get Element Count    css=.source-card
     Should Be Equal As Integers    ${count}    2
-    ${page_text}=    Get Text    css=.source-card-list
-    Should Contain    ${page_text}    ${key1}
-    Should Contain    ${page_text}    ${key2}
-    Get Text    css=.source-card:nth-child(1)    *=    Otsikko:
-    Get Text    css=.source-card:nth-child(1)    *=    Kirjoittaja:
-    Get Text    css=.source-card:nth-child(1)    *=    Julkaisu:
-    Get Text    css=.source-card:nth-child(1)    *=    Vuosi:
-    Get Text    css=.source-card:nth-child(1)    *=    Viiteavain:
+    ${card_text}=    Get Text    css=.source-card:nth-child(1)
+    Should Contain    ${card_text}    Testiartikkeli
+    Should Contain    ${card_text}    Testikirjoittaja
+    Should Contain    ${card_text}    2026
+    Should Not Contain    ${card_text}    ${key1}
+    Should Not Contain    ${card_text}    ${key2}
+    Should Not Contain    ${card_text}    Otsikko:
+    Should Not Contain    ${card_text}    Viiteavain:
+    Should Not Contain    ${card_text}    Julkaisu:
+    Should Not Contain    ${card_text}    Testijulkaisu
+    Click    css=.source-card:nth-child(1) .source-card-link
+    Get Text    css=.citation-details    *=    Testijulkaisu
+    Get Text    css=.citation-details    *=    Viiteavain:

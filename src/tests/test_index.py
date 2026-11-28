@@ -32,7 +32,7 @@ def test_empty_list_has_no_cards(client):
     assert 'class="source-card"' not in html
 
 
-def test_two_articles_are_separate_labeled_cards(client):
+def test_two_articles_are_separate_compact_cards(client):
     articles = (
         {
             "citation_key": "TST1",
@@ -58,10 +58,12 @@ def test_two_articles_are_separate_labeled_cards(client):
 
     html = get_home(client)
     assert html.count('class="source-card"') == 2
-    for value in ("Ensimmäinen otsikko", "Toinen otsikko", "TST1", "TST2"):
+    for value in ("Ensimmäinen otsikko", "Toinen otsikko", "Testikirjoittaja", "2026"):
         assert value in html
-    for label in ("Otsikko:", "Kirjoittaja:", "Julkaisu:", "Vuosi:", "Viiteavain:"):
-        assert label in html
+    for extra in ("TST1", "TST2", "Otsikko:", "Viiteavain:",
+                  "Julkaisu:", "Tyyppi:", "Testijulkaisu"):
+        assert extra not in html
+    assert 'href="/citations/' in html
 
 
 def test_card_stylesheet_is_served(client):
