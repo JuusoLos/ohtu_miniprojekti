@@ -8,3 +8,7 @@
 - ominaisuus läpäisee vanhat testit
 - ominaisuudelle on kirjoittetu vähintään yksi testi
 - ominaisuuden hyväksyy toinen ryhmäläinen
+
+## Testikattavuus
+
+[Yksikk�testien kattavuusraportti](docs/testikattavuus.txt)
